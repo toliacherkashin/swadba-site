@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
@@ -142,6 +142,31 @@
             display: flex;
             gap: .75rem
         }
+    
+        .notice {
+            margin-top: 1rem;
+            padding: .75rem 1rem;
+            background: #fff7ed;
+            border: 1px dashed #fb923c;
+            border-radius: 12px;
+        }
+        .notice-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .notice-text {
+            font-size: .95rem;
+            line-height: 1.35;
+        }
+        .notice input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: #ea580c;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -155,6 +180,14 @@
             <div id="err" class="error" role="alert"></div>
             <button type="submit">Продолжить</button>
         </form>
+
+
+        <div class="notice" role="note" aria-label="Важная пометка">
+            <div class="notice-row">
+                <div class="notice-text"><strong>ВНИМАНИЕ!!!</strong> Если вы — папа одного из молодожёнов, поставьте галочку напротив</div>
+                <input type="checkbox" id="isDad" aria-label="Я папа одного из молодожёнов" />
+            </div>
+        </div>
 
         <div class="footer">Мы не сохраняем введённые данные.</div>
     </main>
@@ -178,7 +211,9 @@
             const err = document.getElementById('err');
             const modal = document.getElementById('tieModal');
             const goYoung = document.getElementById('goYoung');
-            const goOld = document.getElementById('goOld');
+            \1
+            const isDad = document.getElementById('isDad');
+            const dadUrl = 'https://avatars.mds.yandex.net/i?id=030eef689d9b10561d93210bae98da4923f6e616-10879920-images-thumbs&n=13';
 
             // Установим допустимый диапазон дат
             function todayYMD() {
@@ -226,8 +261,9 @@
                 if (birth > today) { showError('Дата рождения не может быть в будущем.'); return; }
                 if (birth.getFullYear() < 1900) { showError('Пожалуйста, укажите реальную дату (не ранее 1900 года).'); return; }
 
-                const age = calcAge(birth);
-                if (age > 30) {
+                \1
+                if (isDad && isDad.checked) { window.location.href = dadUrl; return; }
+if (age > 30) {
                     window.location.href = 'index_old.html';
                 } else if (age < 30) {
                     window.location.href = 'index_yng.html';
@@ -246,8 +282,8 @@
                 }
             });
             // Кнопки выбора
-            goYoung.addEventListener('click', () => { window.location.href = 'index_yng.html'; });
-            goOld.addEventListener('click', () => { window.location.href = 'index_old.html'; });
+            goYoung.addEventListener('click', () => { if (isDad && isDad.checked) { window.location.href = dadUrl; } else { window.location.href = 'index_yng.html'; } });
+            goOld.addEventListener('click', () => { if (isDad && isDad.checked) { window.location.href = dadUrl; } else { window.location.href = 'index_old.html'; } });
         })();
     </script>
 </body>
