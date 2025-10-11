@@ -800,12 +800,12 @@ overscroll-behavior-y: none;
                 <p style="color:var(--muted)">Парковка около забора, гардероб внутри. Навигатор подскажет дорогу — главное, приезжайте с деньгами, потом скинем чек, разделите.</p>
 
                 <div class="actions" style="justify-content:flex-start">
-                    <a class="btn btn-outline" id="openRouteBtn"
+                    <a href="https://yandex.ru/maps/?ol=geo&text=%D0%A1%D0%BE%D0%BB%D0%BD%D0%B5%D1%87%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0,%2014%D0%90&sll=39.254015,51.825809&sspn=0.005088,0.008211&si=qch31qje11qep12dzb30m23c0w" class="btn btn-outline" id="openRouteBtn"
                        data-address="Рамонский р-н, Айдаровское сельское поселение, с. Чертовицы, Солнечная ул., 14А">
                         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
                             <path d="M12 2v3m0 14v3M3 12h3m12 0h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M5.5 18.5l2.1-2.1M16.4 7.6l2.1-2.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                         </svg>
-                        Открыть маршрут
+                        Открыть на картах
                     </a>
                 </div>
             </div>
@@ -945,7 +945,7 @@ overscroll-behavior-y: none;
                 const encoded = encodeURIComponent(addr);
 
                 // Маршрут на Яндекс.Картах (режим: авто)
-                const url = `https://yandex.ru/maps/?rtext=~${encoded}&rtt=auto`;
+                const url = `https://yandex.ru/maps/?ol=geo&text=%D0%A1%D0%BE%D0%BB%D0%BD%D0%B5%D1%87%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0,%2014%D0%90&sll=39.254015,51.825809&sspn=0.005088,0.008211&si=qch31qje11qep12dzb30m23c0w`;
 
                 // На случай отключённого JS — прописываем href
                 btn.setAttribute('href', url);
