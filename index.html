@@ -1,0 +1,254 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Свадебное приглашение — выбор версии</title>
+    <style>
+        :root {
+            --bg: #f7f7fb;
+            --card: #fff;
+            --text: #222;
+            --muted: #666;
+            --accent: #7c3aed;
+            --accent2: #4f46e5;
+            --shadow: 0 10px 30px rgba(0,0,0,.08)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            padding: 2rem;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans";
+            color: var(--text);
+            background: linear-gradient(180deg,#f7f7fb,#ececf7)
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 520px;
+            padding: 2rem
+        }
+
+        h1 {
+            margin: 0 0 .5rem;
+            font-size: 1.6rem
+        }
+
+        p {
+            margin: .25rem 0 1rem;
+            color: var(--muted)
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: .5rem
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: .75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            outline: none;
+            background: #fafafa;
+            transition: .2s border-color,.2s box-shadow
+        }
+
+            input[type="date"]:focus {
+                border-color: var(--accent2);
+                box-shadow: 0 0 0 3px rgba(99,102,241,.16)
+            }
+
+        button {
+            margin-top: 1rem;
+            width: 100%;
+            padding: .9rem 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg,var(--accent),var(--accent2));
+            color: #fff;
+            cursor: pointer;
+            transition: transform .06s, opacity .2s
+        }
+
+            button:hover {
+                opacity: .96
+            }
+
+            button:active {
+                transform: scale(.99)
+            }
+
+        .error {
+            color: #b91c1c;
+            font-size: .95rem;
+            display: none;
+            margin-top: .5rem
+        }
+
+        .footer {
+            margin-top: 1rem;
+            font-size: .9rem;
+            color: var(--muted);
+            text-align: center
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            place-items: center;
+            padding: 1rem;
+            background: rgba(0,0,0,.4)
+        }
+
+            .modal.open {
+                display: grid
+            }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            max-width: 460px;
+            width: 100%;
+            padding: 1.25rem
+        }
+
+        .modal h2 {
+            margin: .25rem 0 .5rem;
+            font-size: 1.25rem
+        }
+
+        .modal p {
+            margin: 0 0 .75rem
+        }
+
+        .modal .row {
+            display: flex;
+            gap: .75rem
+        }
+    </style>
+</head>
+<body>
+    <main class="card" role="main">
+        <h1>Приглашение на свадьбу</h1>
+        <p>Пожалуйста, укажите дату своего рождения, чтобы открыть подходящую версию сайта.</p>
+
+        <form id="ageForm" novalidate>
+            <label for="dob">Дата рождения</label>
+            <input type="date" id="dob" name="dob" required />
+            <div id="err" class="error" role="alert"></div>
+            <button type="submit">Продолжить</button>
+        </form>
+
+        <div class="footer">Мы не сохраняем введённые данные.</div>
+    </main>
+
+    <!-- Модалка на случай, если пользователю ровно 30 лет -->
+    <div id="tieModal" class="modal" aria-hidden="true" aria-labelledby="tieTitle" role="dialog">
+        <div class="modal-box">
+            <h2 id="tieTitle">Вам ровно 30 лет 🎉</h2>
+            <p>Выберите, какую версию сайта открыть:</p>
+            <div class="row">
+                <button id="goYoung" type="button">Молодёжная</button>
+                <button id="goOld" type="button">Классическая</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const dobEl = document.getElementById('dob');
+            const form = document.getElementById('ageForm');
+            const err = document.getElementById('err');
+            const modal = document.getElementById('tieModal');
+            const goYoung = document.getElementById('goYoung');
+            const goOld = document.getElementById('goOld');
+
+            // Установим допустимый диапазон дат
+            function todayYMD() {
+                const now = new Date();
+                const y = now.getFullYear();
+                const m = String(now.getMonth() + 1).padStart(2, '0');
+                const d = String(now.getDate()).padStart(2, '0');
+                return `${y}-${m}-${d}`;
+            }
+            dobEl.max = todayYMD();
+            dobEl.min = '1900-01-01';
+            setTimeout(() => dobEl.focus(), 50);
+
+            function parseDate(ymd) {
+                // Разбираем YYYY-MM-DD в локальный объект Date (без смещения часового пояса)
+                const [y, m, d] = ymd.split('-').map(Number);
+                return new Date(y, (m || 1) - 1, d || 1);
+            }
+
+            function calcAge(birth) {
+                const now = new Date();
+                let age = now.getFullYear() - birth.getFullYear();
+                const mon = now.getMonth() - birth.getMonth();
+                if (mon < 0 || (mon === 0 && now.getDate() < birth.getDate())) age--;
+                return age;
+            }
+
+            function showError(message) {
+                err.textContent = message; err.style.display = 'block';
+            }
+            function clearError() {
+                err.textContent = ''; err.style.display = 'none';
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                clearError();
+                const value = dobEl.value.trim();
+                if (!value) { showError('Пожалуйста, введите дату.'); dobEl.focus(); return; }
+                if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) { showError('Неверный формат. Используйте ГГГГ-ММ-ДД.'); return; }
+
+                const birth = parseDate(value);
+                if (Number.isNaN(birth.getTime())) { showError('Не удалось распознать дату.'); return; }
+                const today = new Date();
+                if (birth > today) { showError('Дата рождения не может быть в будущем.'); return; }
+                if (birth.getFullYear() < 1900) { showError('Пожалуйста, укажите реальную дату (не ранее 1900 года).'); return; }
+
+                const age = calcAge(birth);
+                if (age > 30) {
+                    window.location.href = 'index_old.html';
+                } else if (age < 30) {
+                    window.location.href = 'index_yng.html';
+                } else {
+                    // Ровно 30 — даём выбрать
+                    modal.classList.add('open');
+                    modal.setAttribute('aria-hidden', 'false');
+                }
+            });
+
+            // Закрытие модалки по клику снаружи
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('open');
+                    modal.setAttribute('aria-hidden', 'true');
+                }
+            });
+            // Кнопки выбора
+            goYoung.addEventListener('click', () => { window.location.href = 'index_yng.html'; });
+            goOld.addEventListener('click', () => { window.location.href = 'index_old.html'; });
+        })();
+    </script>
+</body>
+</html>
