@@ -211,7 +211,7 @@
             const err = document.getElementById('err');
             const modal = document.getElementById('tieModal');
             const goYoung = document.getElementById('goYoung');
-            \1
+            const goOld = document.getElementById('goOld');
             const isDad = document.getElementById('isDad');
             const dadUrl = 'https://avatars.mds.yandex.net/i?id=030eef689d9b10561d93210bae98da4923f6e616-10879920-images-thumbs&n=13';
 
@@ -261,7 +261,7 @@
                 if (birth > today) { showError('Дата рождения не может быть в будущем.'); return; }
                 if (birth.getFullYear() < 1900) { showError('Пожалуйста, укажите реальную дату (не ранее 1900 года).'); return; }
 
-                \1
+                const age = calcAge(birth);
                 if (isDad && isDad.checked) { window.location.href = dadUrl; return; }
 if (age > 30) {
                     window.location.href = 'index_old.html';
