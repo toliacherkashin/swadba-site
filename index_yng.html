@@ -1739,7 +1739,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <script>
 (function() { 
   const VARIANT = "yng"; // 'old' | 'yng'
-  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwQ4vT0xWVSM9_6lpFVT6UZGXun9ArqzaH8qffqKpMZ3jNxeB-IS0w7DeXWaMU2igQI/exec"; // ← замените на URL веб‑приложения Google Apps Script
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycby0pooaNUmmonEVR6FPmnSra3cd3fdqMgrxpsrRfqL8jKVvq-q6amQNGG9spdgh-pyU/exec"; // ← замените на URL веб‑приложения Google Apps Script
   const yesBtn = document.getElementById('rsvpYes');
   const noBtn  = document.getElementById('rsvpNo');
   const msg    = document.getElementById('rsvpStatus');
@@ -1747,6 +1747,19 @@ document.addEventListener('DOMContentLoaded', function(){
   const fIn = document.getElementById('rsvpFirstName');
   const lIn = document.getElementById('rsvpLastName');
 
+  (async function flushLocalBackup(){
+  try{
+    const key = 'rsvpLocalBackup';
+    const arr = JSON.parse(localStorage.getItem(key) || '[]');
+    if (!arr.length || !ENDPOINT) return;
+    for (const item of arr) {
+      await fetch(ENDPOINT, { method:'POST', body: JSON.stringify(item) });
+    }
+    localStorage.removeItem(key);
+  }catch(e){}
+})();
+
+    
   // Prefill from localStorage
   let firstName = null, lastName = null;
   try { 
@@ -1789,7 +1802,6 @@ document.addEventListener('DOMContentLoaded', function(){
     try { 
       const res = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
