@@ -1,0 +1,1407 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Эмми & Толя — свадебное приглашение (для семьи)</title>
+    <meta name="description" content="Семейная версия приглашения: программа дня, место и время, дресс-код, контакты." />
+    <meta name="theme-color" content="#B08C7A">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAF7F3;
+            --paper: #FFFFFF;
+            --ink: #2B2B2B;
+            --muted: #6B6B6B;
+            --accent: #B08C7A;
+            --accent-2: #8FA7C9;
+            --shadow: 0 10px 30px rgba(0,0,0,.08);
+            --radius: 20px;
+            --btn-ink: #fff;
+            --btn-bg: #B08C7A;
+            --btn-bg-hover: #9E7A69;
+            --btn-outline-ink: var(--accent);
+            --btn-outline-bg: transparent;
+            --btn-outline-bg-hover: #00000008;
+            --section-gap: clamp(22px, 6vw, 30px);
+            --focus: 0 0 0 3px rgba(176,140,122,.35);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box
+        }
+
+        html, body {
+            min-height: 100%;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            scroll-behavior: auto
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            display: grid;
+            grid-auto-rows: max-content;
+            row-gap: var(--section-gap);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            line-height: 1.15;
+            margin: 0 0 .6em;
+            color: var(--ink)
+        }
+
+        h2 {
+            font-size: clamp(26px, 4vw, 42px);
+            font-weight: 600
+        }
+
+        h3 {
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 600
+        }
+
+        p {
+            margin: .6em 0
+        }
+
+        a {
+            color: inherit
+        }
+
+        .wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        .btn {
+            --_bg: var(--btn-bg);
+            --_ink: var(--btn-ink);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 0;
+            background: var(--_bg);
+            color: var(--_ink);
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: transform .12s ease, background .2s ease, box-shadow .2s ease;
+            will-change: transform;
+            touch-action: manipulation;
+            min-height: 44px;
+        }
+
+            .btn:hover {
+                transform: translateY(-1px);
+            }
+
+            .btn:active {
+                transform: translateY(0);
+            }
+
+            .btn:focus-visible {
+                outline: none;
+                box-shadow: var(--focus);
+            }
+
+            .btn svg {
+                width: 20px;
+                height: 20px;
+                flex: 0 0 20px
+            }
+
+        .btn-primary {
+            --_bg: var(--btn-bg);
+            --_ink: #fff;
+        }
+
+            .btn-primary:hover {
+                background: var(--btn-bg-hover);
+            }
+
+        .btn-outline {
+            --_bg: var(--btn-outline-bg);
+            --_ink: var(--btn-outline-ink);
+            border: 1.5px solid var(--accent);
+            box-shadow: none;
+            background: var(--btn-outline-bg);
+        }
+
+            .btn-outline:hover {
+                background: var(--btn-outline-bg-hover);
+            }
+
+        .btn-ghost {
+            --_bg: transparent;
+            --_ink: #fff;
+            border: 1.5px solid rgba(255,255,255,.55);
+            background: transparent;
+            color: #fff;
+            box-shadow: none;
+        }
+
+            .btn-ghost:hover {
+                background: rgba(255,255,255,.08);
+            }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 16px;
+        }
+
+        .crossfade {
+            height: 220vh;
+            position: relative;
+            padding: 0;
+            background: #000
+        }
+
+            .crossfade .sticky {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                overflow: hidden
+            }
+
+        .photo-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 0;
+        }
+
+        @supports (height: 100svh) {
+            .crossfade { height: 220svh; }
+            .crossfade .sticky { height: 100svh; }
+        }
+
+        @media (max-width: 600px) {
+            .crossfade { height: 180vh; height: 180svh; }
+        }
+
+        .photo-layer {
+            position: absolute;
+            inset: 0;
+            will-change: opacity, transform;
+        }
+
+            .photo-layer > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                transition: opacity .5s ease, transform .5s ease;
+                transform: translateZ(0);
+            }
+
+            .photo-layer.child {
+                z-index: 1;
+            }
+
+            .photo-layer.adult {
+                z-index: 2;
+                opacity: 0;
+            }
+
+        .intro-title {
+            position: absolute;
+            inset: auto 0 7vh 0;
+            z-index: 3;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 6px 30px rgba(0,0,0,.45);
+            padding: 0 16px;
+        }
+
+            .intro-title .names {
+                font-family: 'Playfair Display', serif;
+                font-weight: 700;
+                letter-spacing: .02em;
+                font-size: clamp(42px,7vw,96px);
+                color: inherit;
+                margin: 0;
+            }
+
+            .intro-title .date {
+                font-size: clamp(16px,2.2vw,22px);
+                opacity: .95
+            }
+
+        .gradient-top, .gradient-bottom {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 25vh;
+            z-index: 2;
+            pointer-events: none
+        }
+
+        .gradient-top {
+            top: 0;
+            background: linear-gradient(#0006, transparent)
+        }
+
+        .gradient-bottom {
+            bottom: 0;
+            background: linear-gradient(transparent, #0007)
+        }
+
+        section {
+            padding: 80px 0
+        }
+
+        .card {
+            background: var(--paper);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: clamp(22px,3.2vw,44px)
+        }
+
+        .lead {
+            font-size: clamp(18px, 2.1vw, 22px);
+            color: var(--muted)
+        }
+
+        .grid {
+            display: grid;
+            gap: 24px
+        }
+
+        @media(min-width:860px) {
+            .grid.cols-2 {
+                grid-template-columns: 1.2fr .8fr
+            }
+        }
+
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(22px,2.6vw,30px);
+            color: var(--accent);
+            margin: 0 0 16px
+        }
+
+        .details-grid {
+            display: grid;
+            gap: 18px
+        }
+
+        @media(min-width:820px) {
+            .details-grid {
+                grid-template-columns: repeat(3,1fr)
+            }
+        }
+
+        .detail {
+            background: var(--paper);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: var(--shadow)
+        }
+
+        .kicker {
+            color: var(--accent);
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .big {
+            font-size: clamp(18px,2.5vw,24px)
+        }
+
+        .timeline {
+            display: grid;
+            gap: 14px;
+            margin-top: 10px
+        }
+
+        .slot {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 12px;
+            align-items: start
+        }
+
+        .time {
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
+            color: var(--accent-2)
+        }
+
+        .countdown {
+            display: grid;
+            grid-auto-flow: column;
+            gap: 10px;
+            width: 100%;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-top: 12px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cd-item {
+            background: #F2EFEA;
+            border-radius: 12px;
+            padding: 8px 10px;
+            text-align: center;
+            box-shadow: inset 0 0 0 1px #E9E4DE;
+            min-width: 0;
+        }
+
+            .cd-item .num {
+                font-weight: 700;
+                font-size: 20px;
+                font-variant-numeric: tabular-nums;
+                font-feature-settings: "tnum" 1;
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New",monospace;
+                text-align: center;
+            }
+
+            .cd-item .lbl {
+                display: block;
+                font-size: 12px;
+                color: var(--muted);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-top: 2px
+            }
+
+        #venueAddress {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .reveal {
+            opacity: 1;
+            --lift: 20px;
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+            .reveal.pending { opacity: 0; }
+
+            .reveal.in {
+                opacity: 1;
+                --lift: 0px;
+            }
+
+        footer {
+            padding: 50px 0 90px;
+            color: var(--muted);
+            text-align: center
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .crossfade {
+                height: 100vh; height: 100svh;
+            }
+
+            .reveal, .reveal.pending {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @media print {
+            .crossfade {
+                height: auto
+            }
+
+                .crossfade .sticky {
+                    position: relative;
+                    height: auto
+                }
+
+            .gradient-top, .gradient-bottom, .actions, .music-toggle, #rsvpSection {
+                display: none
+            }
+
+            section {
+                padding: 24px 0
+            }
+
+            .card, .detail {
+                box-shadow: none;
+                border: 1px solid #EAE7E2
+            }
+
+            .intro-title { position: static; color: var(--ink); text-shadow: none; }
+            .photo-frame { background: transparent; }
+            .photo-layer { display: none; }
+            .reveal, .reveal.pending { opacity: 1; }
+            .card, .detail { transform: none; break-inside: avoid; }
+        }
+
+        .fx-bokeh {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            contain: strict;
+        }
+
+        @media (prefers-reduced-motion: reduce), print {
+            .fx-bokeh {
+                display: none !important;
+            }
+        }
+
+        .tilt {
+            will-change: transform;
+            transform: perspective(1000px) translateY(var(--lift, 0px))
+            rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate3d(var(--tx, 0px), var(--ty, 0px), 0);
+            transition: transform .12s ease, box-shadow .2s ease;
+            transform-style: preserve-3d;
+        }
+
+            .tilt:hover {
+                box-shadow: 0 14px 40px rgba(0,0,0,.12);
+            }
+
+        .crossfade .photo-layer {
+            translate: var(--gx,0px) var(--gy,0px);
+            transition: transform .15s ease;
+        }
+
+.intro-title .names .name-btn{
+  background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;
+  -webkit-appearance:none; appearance:none; background-color:transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+.intro-title .names .name-btn:focus-visible{ outline: 2px solid rgba(255,105,180,.6); outline-offset: 4px; border-radius: 6px; }
+.intro-title .names .name-btn:active{ transform: scale(.98); background:none; }
+.intro-title .names .amp{ user-select:none; }
+
+.love-heart{
+  position:fixed; left:0; top:0; z-index:50; pointer-events:none;
+  font-size:28px; will-change: transform, opacity; opacity:0;
+  transform: translate(-50%,-50%) rotate(var(--rot,0deg));
+  animation: heartFloat 950ms ease-out forwards;
+  text-shadow: 0 6px 14px rgba(0,0,0,.25);
+}
+@keyframes heartFloat{
+  0%   { opacity:0; transform: translate(calc(-50% + 0px), -2px) rotate(var(--rot,0deg)) scale(.85); }
+  18%  { opacity:1; }
+  100% { opacity:0; transform: translate(calc(-50% + var(--drift, 0px)), -78px) rotate(calc(var(--rot,0deg) + 8deg)) scale(1.25); }
+}
+@media (prefers-reduced-motion: reduce){ .love-heart{ animation-duration:0ms; opacity:1; } }
+
+.music-toggle {
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 9999;
+    width: 52px;
+    height: 52px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(35,35,35,.9);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    -webkit-backdrop-filter: saturate(140%) blur(6px);
+    backdrop-filter: saturate(140%) blur(6px);
+}
+.music-toggle:focus-visible { outline: 2px solid rgba(255,105,180,.65); outline-offset: 3px; }
+.music-toggle .icon { display:block; width:0; height:0; border-style:solid; border-width:10px 0 10px 16px; border-color:transparent transparent transparent #fff; }
+.music-toggle.is-playing { background: rgba(227,59,100,.9); }
+.music-toggle.is-playing .icon { width:20px; height:20px; border:0; position:relative; }
+.music-toggle.is-playing .icon::before,
+.music-toggle.is-playing .icon::after { content:""; position:absolute; top:0; bottom:0; width:6px; background:#fff; border-radius:1px; }
+.music-toggle.is-playing .icon::before { left:2px; }
+.music-toggle.is-playing .icon::after { right:2px; }
+        [hidden] { display: none !important; }
+        .btn:disabled { opacity: .6; cursor: wait; transform: none; }
+        input { font: inherit; width: 100%; padding: .75rem 1rem; border: 1px solid #bbb; border-radius: 12px; }
+        input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        #rsvpNameRow label { display: block; font-weight: 600; margin: .75rem 0 .25rem; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .tilt { transform: none; }
+        }
+    </style>
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Эмми & Толя — свадебное приглашение (для семьи)">
+  <meta property="og:description" content="Приглашение на свадьбу 17 июля 2027 • Нововоронеж.">
+  <meta property="og:image" content="assets/social-card-1200x630-vrn.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Эмми и Толя — 17.07.2027, Нововоронеж">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Эмми & Толя — свадебное приглашение (для семьи)">
+  <meta name="twitter:description" content="Приглашение на свадьбу 17 июля 2027 • Нововоронеж.">
+  <meta name="twitter:image" content="assets/social-card-1200x630-vrn.jpg">
+
+</head>
+<body>
+
+    <section class="crossfade" aria-label="Обложка-приглашение">
+        <div class="sticky">
+            <div class="photo-frame">
+                <picture class="photo-layer child">
+                    <source media="(max-width: 600px)"
+                            srcset="assets/child-mobile-720x960.jpg 720w,
+                                    assets/child-mobile-1080x1440.jpg 1080w,
+                                    assets/child-mobile-1440x1920.jpg 1440w"
+                            sizes="100vw" />
+                    <source media="(min-width: 601px)"
+                            srcset="assets/child-desktop-1280x853.jpg 1280w,
+                                    assets/child-desktop-1920x1280.jpg 1920w,
+                                    assets/child-desktop-2880x1920.jpg 2880w"
+                            sizes="100vw" />
+                    <img src="assets/child.jpg" alt="Эмми и Толя — детское фото"
+                         width="1920" height="1280"
+                         decoding="async" fetchpriority="high" loading="eager" />
+                </picture>
+                <picture class="photo-layer adult">
+                    <source media="(max-width: 600px)"
+                            srcset="assets/adult-mobile-720x960.jpg 720w,
+                                    assets/adult-mobile-1080x1440.jpg 1080w,
+                                    assets/adult-mobile-1440x1920.jpg 1440w"
+                            sizes="100vw" />
+                    <source media="(min-width: 601px)"
+                            srcset="assets/adult-desktop-1280x853.jpg 1280w,
+                                    assets/adult-desktop-1920x1280.jpg 1920w,
+                                    assets/adult-desktop-2880x1920.jpg 2880w"
+                            sizes="100vw" />
+                    <img src="assets/adult.jpg" alt="Эмми и Толя — современное фото"
+                         width="1920" height="1280"
+                         decoding="async" loading="lazy" />
+                </picture>
+                <div class="gradient-top"></div>
+                <div class="gradient-bottom"></div>
+                <div class="intro-title wrap">
+                    <h1 class="names"><button id="nameTolya" class="name-btn" type="button" aria-label="Толя">Толя</button><span class="amp" aria-hidden="true">&nbsp;&amp;&nbsp;</span><button id="nameEmmi" class="name-btn" type="button" aria-label="Эмми">Эмми</button></h1>
+
+                    <div class="date"><time datetime="2027-07-17">Суббота, 17 июля 2027</time></div>
+
+                    <div class="actions" role="group" aria-label="Быстрые действия">
+                        <button type="button" class="btn btn-primary" id="addToCalendarBtn" hidden>
+
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 3v4M17 3v4M3 11h18M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                            Добавить в календарь
+                        </button>
+                        <a href="#details" class="btn btn-ghost">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5v14m0 0l-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                            К подробностям
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wrap" id="about">
+        <div class="card grid cols-2 reveal">
+            <div>
+                <h2>Дорогая семья</h2>
+                <p class="lead">Мы познакомились в детском лагере, а теперь готовимся сказать друг другу «да». Для нас большая радость — разделить этот день с родными и близкими.</p>
+                <p>Мы научились слушать и поддерживать друг друга, смеяться над мелочами и вместе строить планы. И самое главное — мы очень ждём момента, когда вы будете рядом в этот важный день.</p>
+            </div>
+            <div>
+                <p class="quote">Счастливый дом начинается там, где двое берегут друг друга каждый день.</p>
+                <p style="color:var(--muted)">Будем благодарны за ваши тёплые слова и присутствие. Если понадобится помощь с дорогой или размещением — напишите нам, постараемся всё подсказать.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="wrap" id="details">
+        <div class="details-grid">
+
+            <div class="detail reveal" aria-labelledby="dt-title">
+                <div class="kicker" id="dt-title">Дата и время</div>
+                <div class="big"><strong><span id="eventDateText">17 июля 2027</span></strong></div>
+
+                <div class="countdown" id="countdown" role="timer" aria-live="off" title="Сколько осталось до события" hidden>
+                    <div class="cd-item days">
+                        <span class="num" id="cd-days">00</span>
+                        <span class="lbl" id="cd-days-lbl" title="дней">дн</span>
+                    </div>
+                    <div class="cd-item">
+                        <span class="num" id="cd-hours">00</span>
+                        <span class="lbl" id="cd-hours-lbl" title="часов">ч</span>
+                    </div>
+                    <div class="cd-item">
+                        <span class="num" id="cd-mins">00</span>
+                        <span class="lbl" id="cd-mins-lbl" title="минут">мин</span>
+                    </div>
+                    <div class="cd-item">
+                        <span class="num" id="cd-secs">00</span>
+                        <span class="lbl" id="cd-secs-lbl" title="секунд">с</span>
+                    </div>
+                </div>
+                <div id="countdownNote" role="status" class="lead" style="margin-top:8px;color:var(--muted)"></div>
+
+                <div class="timeline" style="margin-top:14px">
+                    <div class="slot"><div class="time">14:00</div><div>Сбор гостей и welcome-напитки</div></div>
+                    <div class="slot"><div class="time">14:30</div><div>Торжественная регистрация</div></div>
+                    <div class="slot"><div class="time">15:15</div><div>Поздравления</div></div>
+                    <div class="slot"><div class="time">16:00</div><div>Фотосессия</div></div>
+                    <div class="slot"><div class="time">17:30</div><div>Банкет</div></div>
+                    <div class="slot"><div class="time">20:00</div><div>Первый танец и танцы</div></div>
+                    <div class="slot"><div class="time">22:00</div><div>Торт и чаепитие</div></div>
+                    <div class="slot"><div class="time">23:00</div><div>Завершение вечера</div></div>
+                </div>
+            </div>
+
+            <div class="detail reveal" aria-labelledby="loc-title">
+                <div class="kicker" id="loc-title">Локация</div>
+                <div class="big"><strong>Вишнёвый сад</strong></div>
+                <p id="venueAddress">
+                    Город Нововоронеж, улица Курчатова, 2Б, 2 этаж
+                </p>
+                <p style="color:var(--muted)">На территории есть парковка, гардероб внутри. Навигатор подскажет дорогу — если что, мы всегда на связи.</p>
+
+                <div class="actions" style="justify-content:flex-start">
+                    <a class="btn btn-outline" id="openRouteBtn"
+                       data-address="Нововоронеж, улица Курчатова, 2Б" href="https://yandex.ru/maps/?rtext=~%D0%9D%D0%BE%D0%B2%D0%BE%D0%B2%D0%BE%D1%80%D0%BE%D0%BD%D0%B5%D0%B6%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9A%D1%83%D1%80%D1%87%D0%B0%D1%82%D0%BE%D0%B2%D0%B0%2C%202%D0%91&amp;rtt=auto" target="_blank" rel="noopener">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2v3m0 14v3M3 12h3m12 0h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M5.5 18.5l2.1-2.1M16.4 7.6l2.1-2.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                        Открыть маршрут
+                    </a>
+                </div>
+            </div>
+
+            <div class="detail reveal dresscode" aria-labelledby="dc-title">
+                <div class="kicker" id="dc-title">Дресс-код</div>
+                <div class="big">Одевайтесь так, как подсказывает сердце — главное, чтобы вам было комфортно. Просим лишь избегать слишком ярких оттенков.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wrap">
+        <div class="card reveal">
+            <h3>Важно</h3>
+            <p>Мы очень любим детей, но формат вечера — спокойный взрослый праздник. Если не получится оставить ребёнка, пожалуйста, дайте знать — постараемся помочь с размещением.</p>
+            <p>Самый ценный подарок для нас — ваше присутствие. Если всё же захотите поздравить материально, будем благодарны за вклад в наш семейный фонд.</p>
+            <p>Музыка будет для всех поколений: и любимая классика вечеринок, и современные хиты — чтобы было приятно и танцевать, и общаться.</p>
+            <p class="lead" style="margin-top:10px">Будем очень рады видеть вас!<br>С любовью, Эмми и Толя</p>
+
+            <div class="actions" style="margin-top:14px;justify-content:flex-start">
+                <a class="btn btn-primary" href="https://t.me/flaylip" target="_blank" rel="noopener">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                        <path d="M21.8 3.4 2.9 10.3c-.7.3-.7 1.3 0 1.5l4.8 1.5 1.9 5.9c.2.6 1 .7 1.4.2l2.7-3.1 4.8 3.6c.5.4 1.2.1 1.3-.6l2.3-14.4c.1-.7-.5-1.2-1.3-.9Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                    </svg>
+                    Написать в Telegram (Эмми)
+                </a>
+            </div>
+
+            <div class="actions" style="margin-top:14px;justify-content:flex-start">
+                <a class="btn btn-primary" href="https://t.me/chtoliaa" target="_blank" rel="noopener">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                        <path d="M21.8 3.4 2.9 10.3c-.7.3-.7 1.3 0 1.5l4.8 1.5 1.9 5.9c.2.6 1 .7 1.4.2l2.7-3.1 4.8 3.6c.5.4 1.2.1 1.3-.6l2.3-14.4c.1-.7-.5-1.2-1.3-.9Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                    </svg>
+                    Написать в Telegram (Толя)
+                </a>
+            </div>
+        </div>
+    </section>
+
+<section class="wrap" id="rsvpSection" aria-label="Подтверждение участия">
+  <div class="card">
+    <h2>Подтвердите участие</h2>
+    <noscript><p>Для отправки ответа включите JavaScript или напишите Эмми или Толе по ссылкам выше.</p></noscript>
+    <p class="lead" id="rsvpIntro">Проверьте имя и фамилию и отметьте, сможете ли вы прийти. Кнопка «Смогу прийти» откроет короткую анкету пожеланий — участие подтвердится после её отправки.</p>
+    <div id="rsvpNameRow">
+      <label for="rsvpLastName">Фамилия</label>
+      <input id="rsvpLastName" type="text" placeholder="Иванов" autocomplete="family-name" maxlength="80" required />
+      <label for="rsvpFirstName">Имя</label>
+      <input id="rsvpFirstName" type="text" placeholder="Иван" autocomplete="given-name" maxlength="80" required />
+    </div>
+    <div class="actions" style="margin-top:16px;">
+      <a class="btn btn-primary" id="rsvpYes" href="wishes.html">Смогу прийти</a>
+      <button class="btn btn-outline" id="rsvpNo" type="button" disabled>Не смогу прийти</button>
+    </div>
+    <div id="rsvpStatus" role="status" aria-live="polite" class="lead" style="margin-top:10px;"></div>
+    <p style="font-size:.9rem; color:var(--muted); margin-top:24px;">Нам очень важно знать, сможете ли вы прийти!</p>
+  </div>
+</section>
+
+    <script>
+
+        (() => {
+        'use strict';
+        const EVENT = Object.freeze({
+            start: new Date('2027-07-17T14:00:00+03:00'),
+            end: new Date('2027-07-17T23:00:00+03:00'),
+            title: 'Свадьба — Эмми & Толя',
+            uid: 'wedding-20270717@emmi-tolya'
+        });
+        const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+        const $ = (sel, root = document) => root.querySelector(sel);
+        const clamp = (n, min = 0, max = 1) => Math.max(min, Math.min(max, n));
+        const pad2 = (n) => String(n).padStart(2, '0');
+
+        // Словоформы
+        function decl(n, forms) {
+            n = Math.abs(n) % 100; const n1 = n % 10;
+            if (n > 10 && n < 20) return forms[2];
+            if (n1 > 1 && n1 < 5) return forms[1];
+            if (n1 === 1) return forms[0];
+            return forms[2];
+        }
+
+        (function () {
+            const cross = $('.crossfade'); if (!cross) return;
+            const sticky = cross.querySelector('.sticky');
+            const child = sticky.querySelector('.photo-layer.child');
+            const adult = sticky.querySelector('.photo-layer.adult');
+
+            function render() {
+                if (reducedMotion.matches) {
+                    adult.style.opacity = '1';
+                    child.style.transform = adult.style.transform = 'none';
+                    return;
+                }
+                const rect = cross.getBoundingClientRect();
+                const vh = sticky.clientHeight || window.innerHeight;
+                const total = cross.offsetHeight - vh;
+                const progressed = clamp(-rect.top, 0, total);
+                const t = total > 0 ? progressed / total : 0;
+                const start = 0.20, end = 0.80;
+                let p = clamp((t - start) / (end - start));
+                p = p * p * (3 - 2 * p);
+
+                adult.style.opacity = p.toFixed(3);
+                child.style.transform = `scale(${1 + 0.05 * p})`;
+                adult.style.transform = `scale(${1.03 - 0.03 * p})`;
+            }
+
+            let ticking = false;
+            const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { render(); ticking = false; }); } };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll);
+            reducedMotion.addEventListener('change', onScroll);
+            render();
+        })();
+
+        (function () {
+            const els = document.querySelectorAll('.reveal');
+            if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+                els.forEach(el => el.classList.add('in'));
+                return;
+            }
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+            }, { threshold: 0.2 });
+            els.forEach(el => { el.classList.add('pending'); io.observe(el); });
+        })();
+
+        // Native links handle routing without popup detection or duplicate navigation.
+        (function initCalendar() {
+            const btn = $('#addToCalendarBtn');
+            const utc = date => date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+            const escapeText = value => value.replace(/\\/g, '\\\\').replace(/\r?\n/g, '\\n').replace(/[,;]/g, '\\$&');
+            // Fold by UTF-8 bytes without splitting Cyrillic characters.
+            function fold(line) {
+                const encoder = new TextEncoder();
+                let result = '', size = 0;
+                for (const char of line) {
+                    const bytes = encoder.encode(char).length;
+                    if (size + bytes > 75) { result += '\r\n '; size = 1; }
+                    result += char;
+                    size += bytes;
+                }
+                return result;
+            }
+            btn.hidden = false;
+            btn.addEventListener('click', () => {
+                const lines = [
+                    'BEGIN:VCALENDAR', 'VERSION:2.0', 'CALSCALE:GREGORIAN',
+                    'METHOD:PUBLISH', 'PRODID:-//emmi-tolya//invite//RU',
+                    'BEGIN:VEVENT', `UID:${EVENT.uid}`, `DTSTAMP:${utc(new Date())}`,
+                    `DTSTART:${utc(EVENT.start)}`, `DTEND:${utc(EVENT.end)}`,
+                    `SUMMARY:${escapeText(EVENT.title)}`,
+                    `LOCATION:${escapeText($('#venueAddress').textContent.trim())}`,
+                    'DESCRIPTION:Будем рады видеть вас!', 'END:VEVENT', 'END:VCALENDAR'
+                ];
+                const blob = new Blob([lines.map(fold).join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'wedding-emmi-tolya.ics';
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+            });
+        })();
+
+        (function () {
+            const box = $('#countdown');
+            const note = $('#countdownNote');
+            if (!box) return;
+
+            // Время старта события (совпадает с "Сбор гостей")
+            const start = EVENT.start.getTime();
+
+            function tick() {
+                const now = Date.now();
+                let diff = Math.floor((start - now) / 1000); // секунды
+                if (diff <= 0) {
+                    box.hidden = true;
+                    if (note) note.textContent = now < EVENT.end.getTime() ? 'Наш свадебный день уже начался 🎉' : 'Спасибо, что разделили с нами этот день!';
+                    return;
+                }
+                box.hidden = false;
+
+                const days = Math.floor(diff / 86400); diff -= days * 86400;
+                const hours = Math.floor(diff / 3600); diff -= hours * 3600;
+                const mins = Math.floor(diff / 60); diff -= mins * 60;
+                const secs = diff;
+
+                $('#cd-days').textContent = pad2(days);
+                $('#cd-hours').textContent = pad2(hours);
+                $('#cd-mins').textContent = pad2(mins);
+                $('#cd-secs').textContent = pad2(secs);
+
+                $('#cd-days-lbl').title = decl(days, ['день', 'дня', 'дней']);
+                $('#cd-hours-lbl').title = decl(hours, ['час', 'часа', 'часов']);
+                $('#cd-mins-lbl').title = decl(mins, ['минута', 'минуты', 'минут']);
+                $('#cd-secs-lbl').title = decl(secs, ['секунда', 'секунды', 'секунд']);
+
+            }
+
+            let timer;
+            function updateTimer() {
+                clearInterval(timer);
+                if (document.hidden) return;
+                tick();
+                if (Date.now() < EVENT.end.getTime()) timer = setInterval(() => {
+                    tick();
+                    if (Date.now() >= EVENT.end.getTime()) clearInterval(timer);
+                }, Date.now() < start ? 1000 : 60000);
+            }
+            document.addEventListener('visibilitychange', updateTimer);
+            updateTimer();
+        })();
+        })();
+    </script>
+
+    <script>
+        // Декоративные лепестки при прокрутке.
+        (function () {
+            if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            // Канвас (переиспользуем, если уже есть)
+            const c = document.getElementById('fx-bokeh') || (() => {
+                const el = document.createElement('canvas');
+                el.id = 'fx-bokeh'; el.className = 'fx-bokeh'; el.setAttribute('aria-hidden', 'true');
+                // антиподёргивания слоя
+                document.body.appendChild(el);
+                return el;
+            })();
+            const ctx = c.getContext('2d', { alpha: true });
+            if (!ctx) return;
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+
+            const isMobile = matchMedia('(pointer: coarse)').matches;
+            const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2);
+
+            function resize() {
+                c.width = Math.floor(innerWidth * dpr);
+                c.height = Math.floor(innerHeight * dpr);
+                c.style.width = '100%'; c.style.height = '100%';
+            }
+            resize(); addEventListener('resize', resize);
+
+            const COLORS = ['#EED8C9', '#CBB1A0', '#F5F4EF', '#FFC0CB']; // чистые пастельные
+            const MAX = Math.min(200, Math.round((innerWidth * innerHeight) / 8000)); // предел частиц по площади
+            const SPEED_Y_MIN = 0.040; // px/ms
+            const SPEED_Y_MAX = 0.090; // px/ms
+            const ROT_SPEED = 0.0022; // рад/мс
+            const LIFE_DECAY = 0.00022; // убывание жизни за мс
+            const BURST_BASE = 10;      // базовое кол-во при событии скролла
+            const BURST_GAIN_PER_100PX = 10;
+            const SPAWN_THROTTLE_MS = 60;
+            const IDLE_FACTOR = 0.16;    // 0..1 — доля скорости без прокрутки (очень медленно)
+
+            const SPRITES = new Map();
+            function makeSprite(color, size) {
+                const S = Math.max(8, size | 0);
+                const off = (typeof OffscreenCanvas !== 'undefined')
+                    ? new OffscreenCanvas(S, S)
+                    : Object.assign(document.createElement('canvas'), { width: S, height: S });
+
+                const cx = off.getContext('2d');
+                cx.imageSmoothingEnabled = true; cx.imageSmoothingQuality = 'high';
+                cx.translate(S / 2, S / 2);
+                cx.fillStyle = color;
+                // две эллиптические «пелюстки» без теней/градиентов
+                cx.globalAlpha = 0.9;
+                cx.beginPath(); cx.ellipse(0, 0, S * 0.19, S * 0.11, 0, 0, Math.PI * 2); cx.fill();
+                cx.rotate(0.7);
+                cx.beginPath(); cx.ellipse(0, 0, S * 0.19, S * 0.11, 0, 0, Math.PI * 2); cx.fill();
+                return off;
+            }
+            function getSprite(color, s) {
+                // группируем размеры по «корзинам», чтобы переиспользовать спрайты
+                const bucket = Math.max(12, Math.round(s / 6) * 6);
+                const key = color + '@' + bucket;
+                let img = SPRITES.get(key);
+                if (!img) { img = makeSprite(color, bucket); SPRITES.set(key, img); }
+                return { img, size: bucket };
+            }
+
+            const petals = [];
+            let running = false;
+            let activity = 0; // 0..1
+            let lastY = scrollY, lastT = performance.now();
+            let spawnCool = 0;
+
+            function drawPetal(p) {
+                const { img, size } = getSprite(p.color, p.s);
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.r);
+                ctx.globalAlpha = 0.7 * Math.max(0, p.life); // мягкое затухание, НО без «искорок»
+                ctx.drawImage(img, -size / 2, -size / 2, size, size);
+                ctx.restore();
+            }
+
+            function spawn(count, top = true, intensity = 1) {
+                for (let i = 0; i < count && petals.length < MAX; i++) {
+                    const s = (Math.random() * 18 + 10) * dpr;
+                    petals.push({
+                        x: Math.random() * c.width,
+                        y: top ? (-30 - Math.random() * 60) * dpr : Math.random() * c.height * 0.2,
+                        vx: (Math.random() - 0.5) * 0.06 * dpr * (0.7 + 0.6 * intensity),
+                        vy: (SPEED_Y_MIN + Math.random() * (SPEED_Y_MAX - SPEED_Y_MIN)) * dpr * (0.8 + 0.7 * intensity),
+                        r: Math.random() * Math.PI,
+                        vr: (Math.random() - 0.5) * ROT_SPEED,
+                        s, life: 1,
+                        color: COLORS[(Math.random() * COLORS.length) | 0]
+                    });
+                }
+                if (petals.length && !running) { running = true; requestAnimationFrame(loop); }
+            }
+
+            addEventListener('scroll', () => {
+                const now = performance.now();
+                const dy = Math.abs(scrollY - lastY);
+                const dt = Math.max(16, now - lastT);
+                lastY = scrollY; lastT = now;
+
+                const speed = Math.min(1, dy / dt / 2.2);   // интенсивность скролла
+                activity = Math.min(1, activity + speed * 0.85);
+
+                if (spawnCool > 0) return;
+                const burst = Math.min(40, Math.max(6,
+                    Math.round(BURST_BASE + (dy / 100) * BURST_GAIN_PER_100PX)
+                ));
+                spawn(burst, true, 0.5 + speed);
+                spawnCool = SPAWN_THROTTLE_MS;
+                setTimeout(() => { spawnCool = 0; }, SPAWN_THROTTLE_MS);
+            }, { passive: true });
+
+            function loop(prev) {
+                if (document.hidden || petals.length === 0) { running = false; ctx.clearRect(0, 0, c.width, c.height); return; }
+
+                const now = performance.now();
+                const dt = Math.min(32, now - (prev || now - 16));
+                ctx.clearRect(0, 0, c.width, c.height);
+
+                // скорость: очень медленно без скролла, быстро при нём
+                activity *= 0.92;
+                const k = IDLE_FACTOR + activity * (1 - IDLE_FACTOR);
+
+                for (let i = petals.length - 1; i >= 0; i--) {
+                    const p = petals[i];
+                    p.x += p.vx * dt * k;
+                    p.y += p.vy * dt * k;
+                    p.r += p.vr * dt * (0.5 + 0.5 * k);
+                    p.life -= LIFE_DECAY * dt * (0.6 + 0.9 * k);
+
+                    drawPetal(p);
+
+                    if (p.y > c.height + 30 * dpr || p.life <= 0) {
+                        petals.splice(i, 1);
+                    }
+                }
+                requestAnimationFrame(() => loop(now));
+            }
+
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) { lastT = performance.now(); spawn(0); }
+            });
+        })();
+    </script>
+
+    <script>
+        (function () {
+            if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            document.querySelectorAll('.card, .detail').forEach(el => el.classList.add('tilt'));
+
+            const root = document.documentElement;
+            const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+            const cur = { rx:0, ry:0, tx:0, ty:0, gx:0, gy:0 };
+            const tgt = { rx:0, ry:0, tx:0, ty:0, gx:0, gy:0 };
+            const DAMP = 0.14;
+            let raf = 0;
+
+            function apply() {
+                cur.rx += (tgt.rx - cur.rx) * DAMP;
+                cur.ry += (tgt.ry - cur.ry) * DAMP;
+                cur.tx += (tgt.tx - cur.tx) * DAMP;
+                cur.ty += (tgt.ty - cur.ty) * DAMP;
+                cur.gx += (tgt.gx - cur.gx) * DAMP;
+                cur.gy += (tgt.gy - cur.gy) * DAMP;
+
+                root.style.setProperty('--rx', cur.rx.toFixed(2) + 'deg');
+                root.style.setProperty('--ry', cur.ry.toFixed(2) + 'deg');
+                root.style.setProperty('--tx', cur.tx.toFixed(2) + 'px');
+                root.style.setProperty('--ty', cur.ty.toFixed(2) + 'px');
+                root.style.setProperty('--gx', cur.gx.toFixed(2) + 'px');
+                root.style.setProperty('--gy', cur.gy.toFixed(2) + 'px');
+
+                const still = Math.abs(tgt.rx - cur.rx) + Math.abs(tgt.ry - cur.ry) +
+                              Math.abs(tgt.tx - cur.tx) + Math.abs(tgt.ty - cur.ty) +
+                              Math.abs(tgt.gx - cur.gx) + Math.abs(tgt.gy - cur.gy);
+                if (still > 0.02) raf = requestAnimationFrame(apply); else raf = 0;
+            }
+            function kick(){ if(!raf) raf = requestAnimationFrame(apply); }
+
+            const maxDegX = 10, maxDegY = 10, maxTx = 16, maxTy = 16, maxGx = 22, maxGy = 16;
+            let base = null;
+            function fromAngles(beta, gamma) {
+                if (!base) base = { beta, gamma };
+                const b = clamp(beta - base.beta, -45, 45);
+                const g = clamp(gamma - base.gamma, -45, 45);
+                tgt.rx = clamp((b / 45) * maxDegX, -maxDegX, maxDegX);
+                tgt.ry = clamp((g / 45) * maxDegY, -maxDegY, maxDegY);
+                tgt.tx = clamp((g / 45) * maxTx, -maxTx, maxTx);
+                tgt.ty = clamp((-b / 45) * maxTy, -maxTy, maxTy);
+                tgt.gx = clamp((g / 45) * maxGx, -maxGx, maxGx);
+                tgt.gy = clamp((-b / 45) * maxGy, -maxGy, maxGy);
+                kick();
+            }
+            addEventListener('orientationchange', () => { base = null; }, { passive: true });
+
+            // Fallbacks + hints
+            let lastMotion = 0, fallbackOn = false;
+            function enablePointerFallback(note) {
+                if (fallbackOn) return;
+                fallbackOn = true;
+                if (note) showHint(note);
+                addEventListener('pointermove', (e) => {
+                    if (e.pointerType !== 'mouse' || document.hidden) return;
+                    const nx = (e.clientX / innerWidth) * 2 - 1;
+                    const ny = (e.clientY / innerHeight) * 2 - 1;
+                    fromAngles(-ny * 30, nx * 30);
+                }, { passive: true });
+            }
+            function showHint(text) {
+                const hint = document.createElement('div');
+                hint.textContent = text;
+                Object.assign(hint.style, {
+                    position:'fixed', left:'50%', transform:'translateX(-50%)',
+                    bottom:'calc(16px + env(safe-area-inset-bottom))',
+                    padding:'10px 14px', borderRadius:'999px', zIndex:'60',
+                    font:'500 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif',
+                    background:'rgba(30,30,30,.8)', color:'#fff',
+                    backdropFilter:'saturate(140%) blur(6px)', WebkitBackdropFilter:'saturate(140%) blur(6px)',
+                    opacity:'0', transition:'opacity .25s ease'
+                });
+                document.body.appendChild(hint);
+                requestAnimationFrame(()=>{ hint.style.opacity='1'; });
+                setTimeout(()=>{ hint.style.opacity='0'; setTimeout(()=>hint.remove(), 300); }, 2600);
+            }
+
+            function onDO(e) {
+                if (!Number.isFinite(e.beta) || !Number.isFinite(e.gamma)) return;
+                const beta = e.beta;
+                const gamma = typeof e.gamma === 'number' ? e.gamma : 0;
+                if (beta !== 0 || gamma !== 0) lastMotion = performance.now();
+                fromAngles(beta, gamma);
+            }
+
+            function setupMotion() {
+                const useDO = 'DeviceOrientationEvent' in window;
+                if (!useDO) return false;
+                const needPerm = typeof DeviceOrientationEvent.requestPermission === 'function';
+                if (needPerm) {
+                    const btn = document.createElement('button');
+                    btn.id = 'tiltEnable';
+                    btn.type = 'button';
+                    btn.textContent = 'Включить наклон';
+                    Object.assign(btn.style, {
+                        position:'fixed', left:'50%', transform:'translateX(-50%)',
+                        bottom:'calc(16px + env(safe-area-inset-bottom))',
+                        zIndex:'50', padding:'10px 14px', borderRadius:'999px',
+                        font:'600 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif',
+                        background:'rgba(255,255,255,.9)', color:'#111',
+                        boxShadow:'0 6px 20px rgba(0,0,0,.12)', border:'1px solid rgba(0,0,0,.06)',
+                        backdropFilter:'saturate(140%) blur(6px)', WebkitBackdropFilter:'saturate(140%) blur(6px)',
+                    });
+                    document.body.appendChild(btn);
+                    btn.addEventListener('click', async () => {
+                        try {
+                            const res = await DeviceOrientationEvent.requestPermission();
+                            if (res === 'granted') {
+                                addEventListener('deviceorientation', onDO, { passive: true });
+                                btn.remove();
+                                showHint('Наклоните телефон');
+                                setTimeout(() => {
+                                    if (performance.now() - lastMotion > 1500) {
+                                        enablePointerFallback('Датчик недоступен — используем касание');
+                                    }
+                                }, 1800);
+                            } else {
+                                btn.textContent = 'Доступ отклонён';
+                                setTimeout(() => { enablePointerFallback('Используем касание'); btn.remove(); }, 1200);
+                            }
+                        } catch {
+                            btn.textContent = 'Нет доступа к датчику';
+                            setTimeout(() => { enablePointerFallback('Используем касание'); btn.remove(); }, 1200);
+                        }
+                    }, { passive: true });
+                    return true;
+                } else {
+                    addEventListener('deviceorientation', onDO, { passive: true });
+                    setTimeout(() => {
+                        if (performance.now() - lastMotion > 1500) {
+                            enablePointerFallback('Датчик недоступен — используем касание');
+                        }
+                    }, 1800);
+                    return true;
+                }
+            }
+
+            const hasMotion = setupMotion();
+            if (!hasMotion) enablePointerFallback();
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    tgt.rx = tgt.ry = tgt.tx = tgt.ty = tgt.gx = tgt.gy = 0; kick();
+                }
+            });
+        })();
+    </script>
+
+<script>
+(() => {
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    function showHeart(event, emoji) {
+        if (reducedMotion.matches) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        const heart = document.createElement('div');
+        heart.className = 'love-heart';
+        heart.setAttribute('aria-hidden', 'true');
+        heart.textContent = emoji;
+        heart.style.left = (event.detail ? event.clientX : rect.left + rect.width / 2) + 'px';
+        heart.style.top = ((event.detail ? event.clientY : rect.top + rect.height / 2) - 8) + 'px';
+        heart.style.setProperty('--drift', (Math.random() * 28 - 14) + 'px');
+        heart.style.setProperty('--rot', (Math.random() * 30 - 15) + 'deg');
+        document.body.appendChild(heart);
+        heart.addEventListener('animationend', () => heart.remove(), { once: true });
+        setTimeout(() => heart.remove(), 1200);
+        try { navigator.vibrate?.(15); } catch { /* Vibration is optional. */ }
+    }
+    for (const [id, emoji] of [['nameEmmi', '💗'], ['nameTolya', '❤️']]) {
+        document.getElementById(id).addEventListener('click', event => showHeart(event, emoji));
+    }
+})();
+</script>
+
+<audio id="bgMusic" preload="none" loop playsinline>
+
+  <source src="assets/track-old.mp3" type="audio/mpeg">
+  <source src="assets/track-old.ogg" type="audio/ogg">
+</audio>
+<button id="musicToggle" class="music-toggle" type="button" aria-label="Включить музыку" aria-pressed="false" hidden>
+  <span class="icon" aria-hidden="true"></span>
+</button>
+<p id="musicStatus" role="status" class="wrap" hidden></p>
+<script id="music-js">
+(() => {
+    const audio = document.getElementById('bgMusic');
+    const button = document.getElementById('musicToggle');
+    if (!audio || !button) return;
+
+    button.hidden = false;
+    const status = document.getElementById('musicStatus');
+    audio.volume = 0.45;
+
+    const syncUI = () => {
+        const playing = !audio.paused;
+        button.classList.toggle('is-playing', playing);
+        button.setAttribute('aria-pressed', String(playing));
+        button.setAttribute('aria-label', playing ? 'Пауза' : 'Включить музыку');
+    };
+
+    button.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.muted = false;
+            status.textContent = ''; status.hidden = true;
+            audio.play().catch(() => { status.hidden = false; status.textContent = 'Музыка не загрузилась. Попробуйте включить её ещё раз.'; syncUI(); });
+        } else {
+            audio.pause();
+        }
+    });
+
+    audio.addEventListener('error', () => { status.hidden = false; status.textContent = 'Не удалось загрузить музыку.'; syncUI(); });
+    audio.addEventListener('play', syncUI);
+    audio.addEventListener('pause', syncUI);
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && !audio.paused) audio.pause();
+    });
+
+    syncUI();
+})();
+</script>
+
+<script id="rsvp-js">
+(() => {
+    'use strict';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbziWVr6gYXlTcySN4xcoV_OCU8NHQEMioSktK39JGT90acP76PddcFF4nnu_pTtL3pk/exec';
+    const VARIANT = 'old';
+    const BACKUP_KEY = 'rsvpLocalBackup';
+    const byId = id => document.getElementById(id);
+    const yes = byId('rsvpYes');
+    const no = byId('rsvpNo');
+    const message = byId('rsvpStatus');
+    const first = byId('rsvpFirstName');
+    const last = byId('rsvpLastName');
+    let pending = false;
+
+    const sameGuest = (a, b) => a.firstName === b.firstName && a.lastName === b.lastName && a.variant === b.variant;
+    function readBackups() {
+        const items = JSON.parse(localStorage.getItem(BACKUP_KEY) || '[]');
+        if (!Array.isArray(items) || items.some(item => !item || typeof item !== 'object')) {
+            throw new Error('Invalid backup');
+        }
+        return items;
+    }
+    function saveBackup(payload) {
+        try {
+            const items = readBackups().filter(item => !sameGuest(item, payload));
+            items.push(payload);
+            localStorage.setItem(BACKUP_KEY, JSON.stringify(items));
+            return true;
+        } catch { return false; }
+    }
+    try {
+        first.value = localStorage.getItem('guestFirstName') || '';
+        last.value = localStorage.getItem('guestLastName') || '';
+        if (readBackups().length) {
+            message.textContent = 'На этом устройстве есть ответы без подтверждения отправки. Проверьте имя и отправьте актуальный ответ ещё раз.';
+        }
+    } catch { /* The form also works without browser storage. */ }
+
+    function lock(value) {
+        pending = value;
+        no.disabled = first.disabled = last.disabled = value;
+        yes.setAttribute('aria-disabled', String(value));
+        byId('rsvpSection').setAttribute('aria-busy', String(value));
+    }
+    async function submit(willAttend) {
+        if (pending) return;
+        first.value = first.value.trim();
+        last.value = last.value.trim();
+        for (const [input, label] of [[last, 'фамилию'], [first, 'имя']]) {
+            if (!input.value || input.value.length > 80) {
+                message.textContent = `Укажите ${label} (до 80 символов).`;
+                input.focus();
+                return;
+            }
+        }
+        const payload = {
+            firstName: first.value, lastName: last.value,
+            willAttend, variant: VARIANT, ts: new Date().toISOString()
+        };
+        try {
+            localStorage.setItem('guestFirstName', payload.firstName);
+            localStorage.setItem('guestLastName', payload.lastName);
+        } catch { /* Storage is optional; sending does not depend on it. */ }
+        lock(true);
+        message.textContent = 'Отправляем ответ…';
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 15000);
+        try {
+            // Keep a simple POST compatible with the existing Apps Script endpoint.
+            const response = await fetch(ENDPOINT, {
+                method: 'POST', body: JSON.stringify(payload), signal: controller.signal
+            });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const result = await response.json();
+            // Expected server contract: {ok:true}, {success:true}, or {status:'ok'|'success'}.
+            const accepted = result && (result.ok === true || result.success === true || ['ok', 'success'].includes(result.status));
+            if (!accepted || result.error || result.ok === false || result.success === false) {
+                throw new Error('Server did not confirm saving');
+            }
+            let backupCleared = true;
+            try {
+                const items = readBackups().filter(item => !sameGuest(item, payload));
+                if (items.length) localStorage.setItem(BACKUP_KEY, JSON.stringify(items));
+                else localStorage.removeItem(BACKUP_KEY);
+            } catch { backupCleared = false; }
+            message.textContent = 'Спасибо! Ваш ответ принят: ' + (willAttend ? 'приду.' : 'не приду.') +
+                (backupCleared ? ' Если планы изменятся, можно отправить новый ответ.' : ' Локальную копию не удалось обновить; повторная отправка сейчас не нужна.');
+        } catch {
+            const saved = saveBackup(payload);
+            message.textContent = 'Подтверждение от сервера не получено. ' +
+                (saved ? 'Ответ сохранён на этом устройстве. ' : 'Сохранить ответ на этом устройстве тоже не удалось. ') +
+                'Попробуйте отправить ещё раз или напишите Эмми или Толе.';
+        } finally {
+            clearTimeout(timeout);
+            lock(false);
+        }
+    }
+    // Attendance and wishes are submitted together on the next page.
+    yes.addEventListener('click', event => {
+        if (pending) { event.preventDefault(); return; }
+        const guest = { firstName: first.value.trim(), lastName: last.value.trim() };
+        try { sessionStorage.setItem('weddingGuest', JSON.stringify(guest)); } catch { /* Names can be entered on the next page. */ }
+        // The native href opens the questionnaire even if this script cannot run.
+    });
+    no.addEventListener('click', () => submit(false));
+    lock(false);
+})();
+</script>
+
+<footer>
+        <div class="wrap">© Эмми & Толя · 2027</div>
+    </footer>
+</body>
+</html>

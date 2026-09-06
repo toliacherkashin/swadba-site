@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FAF7F3">
+  <title>Собери свадебный букет — Эмми и Толя</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#FAF7F3; --paper:#fff; --ink:#2B2B2B; --muted:#70675F; --accent:#805D4C; --line:#E7DFD6; --soft:#F4EEE7; }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:400 15px/1.6 'Montserrat',system-ui,sans-serif; }
+    button { font:inherit; }
+    a { color:var(--accent); text-underline-offset:4px; }
+    :focus-visible { outline:3px solid #8FA7C9; outline-offset:4px; }
+    .wrap { max-width:900px; margin:auto; padding:0 20px; }
+    nav { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:24px 0; border-bottom:1px solid var(--line); }
+    nav a { font-size:13px; text-decoration:none; padding:8px 0; }
+    .monogram { font:600 24px 'Playfair Display',Georgia,serif; color:var(--accent); }
+    header { text-align:center; padding:32px 0 24px; }
+    .eyebrow { font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+    h1,h2 { font-family:'Playfair Display',Georgia,serif; line-height:1.1; }
+    h1 { font-size:clamp(32px,5.2vw,52px); margin:14px 0; font-weight:600; }
+    header p { margin:12px auto 0; max-width:560px; color:var(--muted); font-size:14px; }
+    #surveyNotice { background:#EAF1E8; color:#325535; padding:12px 20px; border-radius:12px; }
+    .game { max-width:700px; margin:0 auto; background:var(--paper); border:1px solid var(--line); border-radius:24px; padding:18px; box-shadow:0 12px 32px #49302408; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:2px 0 14px; }
+    .stat { text-align:center; border-right:1px solid var(--line); }
+    .stat:last-child { border:0; }
+    .stat span { display:block; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+    .stat strong { font-size:24px; font-weight:600; font-variant-numeric:tabular-nums; }
+    .stage { position:relative; background:linear-gradient(#F8F2EA,#FDFBF7); border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+    canvas { display:block; width:100%; aspect-ratio:6/5; touch-action:none; }
+    .overlay { position:absolute; inset:0; display:flex; justify-content:center; align-items:center; padding:20px; background:#FAF7F3F2; }
+    .panel { max-width:370px; text-align:center; }
+    .bouquet { font-size:46px; line-height:1; margin-bottom:12px; }
+    h2 { font-size:clamp(26px,4vw,36px); margin:0 0 12px; font-weight:600; }
+    .panel p { font-size:13px; color:var(--muted); margin:8px 0 18px; }
+    .legend { display:flex; justify-content:center; gap:18px; font-size:13px; margin:12px 0 20px; }
+    .btn { border:1px solid var(--accent); border-radius:999px; background:var(--accent); color:white; min-height:46px; padding:11px 22px; font-weight:600; font-size:13px; cursor:pointer; touch-action:manipulation; }
+    .btn.secondary { color:var(--accent); background:transparent; }
+    .btn:disabled { opacity:.4; cursor:default; }
+    .controls { display:flex; justify-content:space-between; align-items:center; gap:12px; padding-top:14px; }
+    .arrows { display:flex; gap:8px; }
+    .arrow { width:54px; padding:8px; font-size:20px; user-select:none; -webkit-user-select:none; touch-action:none; }
+    .instructions { text-align:center; font-size:12px; color:var(--muted); margin:14px 0 2px; }
+    .below { text-align:center; margin:20px 0; color:var(--muted); font-size:12px; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+    footer { text-align:center; padding:16px 20px 36px; font-size:12px; color:var(--muted); }
+    @media(max-width:450px) { .wrap { padding:0 12px; } header { padding:24px 0 20px; } .game { padding:12px; border-radius:20px; } canvas { aspect-ratio:4/5; } .overlay { padding:14px; } .stat strong { font-size:22px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav aria-label="Навигация"><a href="index_old.html">← К приглашению</a><span class="monogram" aria-label="Эмми и Толя">Э &amp; Т</span></nav>
+    <header>
+      <div class="eyebrow">Маленькая игра до большого дня</div>
+      <h1>Собери свадебный букет</h1>
+      <p id="surveyNotice" role="status" hidden>Спасибо! Ваше участие и пожелания приняты.</p>
+      <p>Поймайте немного праздничного настроения.<br>Цветы и кольца уже летят — осталось подставить корзинку!</p>
+    </header>
+    <main>
+      <p id="playerName" class="below"></p>
+      <section class="game" aria-label="Игра с корзинкой">
+        <div class="stats" aria-live="off">
+          <div class="stat"><span>Очки</span><strong id="score">0</strong></div>
+          <div class="stat"><span>Жизни</span><strong id="lives" aria-label="Осталось 5 жизней">♥ 5</strong></div>
+          <div class="stat"><span>Мой рекорд</span><strong id="best">0</strong></div>
+        </div>
+        <div class="stage">
+          <canvas id="board" width="600" height="500" tabindex="0" role="img" aria-label="Игровое поле. Двигайте корзинку стрелками влево и вправо. Пробел — пауза." aria-describedby="instructions">Для игры нужен браузер с поддержкой Canvas.</canvas>
+          <div class="overlay" id="overlay">
+            <div class="panel">
+              <div class="bouquet" aria-hidden="true">💐</div>
+              <h2 id="panelTitle">Букет ждёт вас</h2>
+              <p id="panelText">У вас 5 жизней. Каждый пропущенный цветок или кольцо отнимает одну. Игра закончится, когда жизни закончатся.</p>
+              <div class="legend" id="legend"><span>🌸 цветок +1</span><span>💍 кольцо +3</span></div>
+              <button id="mainBtn" class="btn" type="button" disabled>Начать игру</button>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="arrows" role="group" aria-label="Движение корзинки">
+            <button id="leftBtn" class="btn secondary arrow" type="button" aria-label="Корзинка влево" disabled>←</button>
+            <button id="rightBtn" class="btn secondary arrow" type="button" aria-label="Корзинка вправо" disabled>→</button>
+          </div>
+          <button id="pauseBtn" class="btn secondary" type="button" disabled>Пауза</button>
+        </div>
+        <p class="instructions" id="instructions">На телефоне водите пальцем по полю или удерживайте стрелки. На компьютере — стрелки клавиатуры, пробел для паузы.</p>
+        <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
+        <noscript><p>Для игры включите JavaScript. <a href="index_old.html">Вернуться к приглашению</a>.</p></noscript>
+      </section>
+      <div class="below" id="delivery">
+        <p id="saveStatus" role="status" aria-live="polite"></p>
+        <button id="retrySave" type="button" class="btn secondary" hidden>Повторить отправку результата</button>
+      </div>
+      <p class="below">В рейтинге учитывается лучшая попытка. При равных очках — одинаковое место.<br><a href="wishes.html">Вернуться к анкете / сменить гостя</a></p>
+    </main>
+  </div>
+  <footer>С любовью, Эмми и Толя · 17 июля 2027</footer>
+  <script>
+  (() => {
+    'use strict';
+    const INITIAL_LIVES = 5;
+    const GAME_VERSION = 'bouquet-lives-v1';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbziWVr6gYXlTcySN4xcoV_OCU8NHQEMioSktK39JGT90acP76PddcFF4nnu_pTtL3pk/exec';
+    const WIDTH = 600, HALF_BASKET = 48;
+    let HEIGHT = 500, BASKET_Y = 439;
+    let access = null;
+    try {
+      const params = new URLSearchParams(window.location.hash.slice(1));
+      if (params.has('access')) {
+        access = JSON.parse(params.get('access'));
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+        try { sessionStorage.setItem('weddingGameAccess', JSON.stringify(access)); } catch { /* Memory fallback. */ }
+      } else access = JSON.parse(sessionStorage.getItem('weddingGameAccess') || 'null');
+    } catch { /* Access can be obtained by sending the questionnaire again. */ }
+    if (!access || typeof access.token !== 'string' || typeof access.guestKey !== 'string') access = null;
+    const RECORD_KEY = 'weddingBouquetBest:lives-v1:' + (access?.guestKey || 'none');
+    const PENDING_KEY = 'weddingBouquetPending:lives-v1:' + (access?.guestKey || 'none');
+    const $ = id => document.getElementById(id);
+    const canvas = $('board');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) { $('panelText').textContent = 'Этот браузер не поддерживает игру. Попробуйте открыть приглашение в другом браузере.'; return; }
+    let state = 'ready';
+    let score = 0, best = 0, lives = INITIAL_LIVES, elapsed = 0, missed = 0, basket = WIDTH / 2;
+    let runToken = null, pendingResult = null, saving = false, starting = false;
+    let items = [], spawnClock = 0, previous = 0, frame = 0;
+    let keys = new Set();
+    let pointerDirection = 0;
+    let activePointer = null;
+    let flowersCaught = 0, ringsCaught = 0;
+    let recordAvailable = true;
+    try {
+      const saved = Number(localStorage.getItem(RECORD_KEY));
+      best = Number.isFinite(saved) && saved >= 0 ? Math.floor(saved) : 0;
+    } catch { recordAvailable = false; }
+    try {
+      if (sessionStorage.getItem('weddingSurveyComplete') === 'yes') {
+        $('surveyNotice').hidden = false;
+        sessionStorage.removeItem('weddingSurveyComplete');
+      }
+    } catch { /* The game works without storage. */ }
+    $('best').textContent = best;
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    async function api(payload) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(ENDPOINT, {method:'POST',body:JSON.stringify(payload),signal:controller.signal});
+        if (!response.ok) throw new Error('Сервер недоступен. Попробуйте ещё раз.');
+        const result = await response.json();
+        if (result.ok !== true) throw new Error(result.message || 'Сохранение не подтверждено. Попробуйте ещё раз.');
+        return result;
+      } catch (error) {
+        if (error.name === 'AbortError' || error.name === 'TypeError') throw new Error('Нет подтверждения от сервера. Проверьте соединение и повторите отправку.');
+        throw error;
+      } finally { clearTimeout(timeout); }
+    }
+    async function saveResult() {
+      if (saving || !pendingResult) return;
+      saving = true;
+      $('mainBtn').disabled = true;
+      $('retrySave').disabled = true;
+      $('saveStatus').textContent = 'Записываем результат…';
+      try {
+        const result = await api(pendingResult);
+        if (result.scoreSaved !== true || !Number.isInteger(result.bestScore) || !Number.isInteger(result.rank)) throw new Error('Сервер не подтвердил запись результата.');
+        best = result.bestScore; $('best').textContent = best;
+        $('saveStatus').textContent = `Результат записан на имя ${access.firstName} ${access.lastName}. Лучший результат: ${best}. Место сейчас: ${result.rank}. Попыток: ${result.attempts}.`;
+        pendingResult = null;
+        try { localStorage.removeItem(PENDING_KEY); localStorage.setItem(RECORD_KEY,String(best)); } catch { /* Confirmed server result remains authoritative. */ }
+        $('retrySave').hidden = true;
+        $('mainBtn').disabled = false;
+      } catch (error) {
+        $('saveStatus').textContent = error.message + ' Результат сохранён в этой открытой странице; нажмите «Повторить отправку результата».';
+        $('retrySave').hidden = false;
+      } finally { saving = false; $('retrySave').disabled = false; }
+    }
+    function controls() {
+      const running = state === 'running';
+      $('leftBtn').disabled = $('rightBtn').disabled = !running;
+      $('pauseBtn').disabled = !['running', 'paused'].includes(state);
+      $('pauseBtn').textContent = state === 'paused' ? 'Продолжить' : 'Пауза';
+    }
+    function updateStats() {
+      $('score').textContent = score;
+      $('lives').textContent = '♥ ' + lives;
+      $('lives').setAttribute('aria-label', 'Осталось жизней: ' + lives);
+    }
+    function showPanel(title, text, button) {
+      $('panelTitle').textContent = title;
+      $('panelText').textContent = text;
+      $('mainBtn').textContent = button;
+      $('legend').hidden = state !== 'ready';
+      $('overlay').hidden = false;
+      $('mainBtn').focus({preventScroll:true});
+    }
+    function clearInput() { keys.clear(); pointerDirection = 0; activePointer = null; }
+    async function start() {
+      if (!access || starting || saving || pendingResult) return;
+      starting = true;
+      $('mainBtn').disabled = true;
+      $('saveStatus').textContent = 'Подготавливаем раунд…';
+      try {
+        const response = await api({action:'startGame', gameToken:access.token});
+        if (response.gameVersion !== GAME_VERSION || response.lives !== INITIAL_LIVES || typeof response.runToken !== 'string') throw new Error('Обновите страницу и обработчик игры.');
+        runToken = response.runToken;
+      } catch (error) {
+        $('saveStatus').textContent = error.message;
+        starting = false; $('mainBtn').disabled = false; return;
+      }
+      starting = false;
+      $('saveStatus').textContent = '';
+      $('mainBtn').disabled = false;
+      cancelAnimationFrame(frame);
+      score = 0; lives = INITIAL_LIVES; elapsed = 0; missed = 0; basket = WIDTH / 2;
+      items = []; spawnClock = 0; flowersCaught = ringsCaught = 0;
+      clearInput(); state = 'running';
+      $('overlay').hidden = true; updateStats(); controls();
+      canvas.focus({preventScroll:true});
+      $('announcement').textContent = 'Игра началась. У вас 5 жизней.';
+      previous = performance.now(); frame = requestAnimationFrame(loop);
+    }
+    function pause() {
+      if (state !== 'running') return;
+      state = 'paused'; cancelAnimationFrame(frame); clearInput(); controls();
+      showPanel('Поймаем момент', 'Игра на паузе. Жизни и очки сохраняются — продолжите, когда будете готовы.', 'Продолжить');
+      $('announcement').textContent = 'Игра на паузе.';
+    }
+    function resume() {
+      if (state !== 'paused') return;
+      clearInput(); state = 'running'; $('overlay').hidden = true; controls();
+      canvas.focus({preventScroll:true}); previous = performance.now();
+      frame = requestAnimationFrame(loop);
+    }
+    function finish() {
+      state = 'finished'; cancelAnimationFrame(frame); clearInput();
+      const isRecord = score > best;
+      if (isRecord) {
+        best = score; $('best').textContent = best;
+        try { localStorage.setItem(RECORD_KEY, String(best)); } catch { recordAvailable = false; }
+      }
+      updateStats(); controls(); draw();
+      const message = `Ваш результат: ${score}. Цветов: ${flowersCaught}, колец: ${ringsCaught}. ` +
+        (isRecord ? 'Новый личный рекорд! ' : 'Спасибо за этот маленький праздник! ') +
+        (!recordAvailable ? 'Рекорд доступен только до закрытия страницы.' : '');
+      showPanel(score > 0 ? 'Какой прекрасный букет!' : 'Ещё один букет?', message, 'Сыграть ещё');
+      $('announcement').textContent = message;
+      pendingResult = {action:'saveGameScore',runToken,gameVersion:GAME_VERSION,score,flowersCaught,ringsCaught,missed,
+        activeSeconds:Math.ceil(elapsed * 1000) / 1000};
+      try { localStorage.setItem(PENDING_KEY, JSON.stringify(pendingResult)); } catch { /* Retry remains available in memory. */ }
+      saveResult();
+    }
+    function spawn() {
+      const ring = Math.random() < .16;
+      const flowers = ['🌸', '🌷', '🌼', '🌹'];
+      items.push({x:32 + Math.random() * (WIDTH - 64), y:-24, speed:(HEIGHT / 500) * (96 + Math.random() * 42 + Math.min(elapsed * .9, 180)),
+        emoji:ring ? '💍' : flowers[Math.floor(Math.random()*flowers.length)], points:ring ? 3 : 1});
+    }
+    function step(dt) {
+      if (state !== 'running') return;
+      elapsed += dt;
+      const direction = pointerDirection || (Number(keys.has('ArrowRight')) - Number(keys.has('ArrowLeft')));
+      basket = clamp(basket + direction * 370 * dt, HALF_BASKET, WIDTH - HALF_BASKET);
+      spawnClock += dt;
+      while (spawnClock >= .62) { spawnClock -= .62; spawn(); }
+      for (let i = 0; i < items.length;) {
+        const item = items[i], oldY = item.y;
+        item.y += item.speed * dt;
+        if (oldY <= BASKET_Y && item.y >= BASKET_Y && Math.abs(item.x - basket) <= HALF_BASKET) {
+          score += item.points;
+          if (item.points === 3) ringsCaught++; else flowersCaught++;
+          items.splice(i, 1);
+        } else if (item.y > HEIGHT + 30) {
+          items.splice(i, 1); missed++; lives--;
+          $('announcement').textContent = 'Осталось жизней: ' + lives;
+          if (lives === 0) { updateStats(); finish(); return; }
+        } else i++;
+      }
+      updateStats();
+    }
+    function draw() {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '42px "Apple Color Emoji", "Segoe UI Emoji", sans-serif';
+      for (const item of items) ctx.fillText(item.emoji, item.x, item.y);
+      ctx.font = '82px "Apple Color Emoji", "Segoe UI Emoji", sans-serif';
+      ctx.fillText('🧺', basket, BASKET_Y + 12);
+    }
+    function loop(now) {
+      if (state !== 'running') return;
+      const dt = Math.max(0, (now - previous) / 1000); previous = now;
+      // Suspend a stalled browser instead of making several lives vanish at once.
+      if (dt > .5) { pause(); return; }
+      let rest = dt;
+      while (rest > 0 && state === 'running') { const delta = Math.min(rest, .025); step(delta); rest -= delta; }
+      draw();
+      if (state === 'running') frame = requestAnimationFrame(loop);
+    }
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      const oldHeight = HEIGHT;
+      HEIGHT = WIDTH * rect.height / Math.max(1, rect.width);
+      BASKET_Y = HEIGHT - 61;
+      for (const item of items) { item.y *= HEIGHT / oldHeight; item.speed *= HEIGHT / oldHeight; }
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      ctx.setTransform(canvas.width / WIDTH, 0, 0, canvas.height / HEIGHT, 0, 0);
+      draw();
+    }
+    function moveTo(event) {
+      const rect = canvas.getBoundingClientRect();
+      basket = clamp((event.clientX - rect.left) / rect.width * WIDTH, HALF_BASKET, WIDTH - HALF_BASKET);
+    }
+    canvas.addEventListener('pointerdown', event => {
+      if (state !== 'running') return;
+      activePointer = event.pointerId; canvas.setPointerCapture(event.pointerId); moveTo(event);
+    });
+    canvas.addEventListener('pointermove', event => {
+      if (state === 'running' && (event.pointerType === 'mouse' || event.pointerId === activePointer)) moveTo(event);
+    });
+    const endPointer = event => { if (event.pointerId === activePointer) activePointer = null; };
+    canvas.addEventListener('pointerup', endPointer); canvas.addEventListener('pointercancel', endPointer);
+    for (const [id, direction] of [['leftBtn', -1], ['rightBtn', 1]]) {
+      const button = $(id);
+      button.addEventListener('pointerdown', event => {
+        if (state !== 'running') return;
+        event.preventDefault(); pointerDirection = direction; button.setPointerCapture(event.pointerId);
+      });
+      const release = () => { pointerDirection = 0; };
+      button.addEventListener('pointerup', release); button.addEventListener('pointercancel', release); button.addEventListener('lostpointercapture', release);
+      button.addEventListener('click', event => {
+        if (event.detail === 0 && state === 'running') { basket = clamp(basket + direction * 45, HALF_BASKET, WIDTH - HALF_BASKET); draw(); }
+      });
+    }
+    canvas.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); if (state === 'running') keys.add(event.key); }
+      if (event.code === 'Space' && !event.repeat) { event.preventDefault(); pause(); }
+    });
+    window.addEventListener('keyup', event => keys.delete(event.key));
+    canvas.addEventListener('blur', () => keys.clear());
+    window.addEventListener('blur', pause);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+    window.addEventListener('pagehide', pause);
+    window.addEventListener('resize', resize);
+    $('mainBtn').addEventListener('click', () => state === 'paused' ? resume() : start());
+    $('pauseBtn').addEventListener('click', () => state === 'paused' ? resume() : pause());
+    $('retrySave').addEventListener('click', saveResult);
+    $('mainBtn').disabled = !access;
+    if (access) {
+      $('playerName').textContent = 'Играет: ' + access.firstName + ' ' + access.lastName;
+      try { pendingResult = JSON.parse(localStorage.getItem(PENDING_KEY) || 'null'); } catch { /* Optional recovery. */ }
+      if (pendingResult) {
+        $('mainBtn').disabled = true;
+        $('saveStatus').textContent = 'Есть результат без подтверждения записи. Отправьте его повторно, прежде чем начать новую попытку.';
+        $('retrySave').hidden = false;
+      }
+    } else {
+      $('panelText').textContent = 'Чтобы результат записался на ваше имя, сначала отправьте анкету. Ссылка на неё находится под игрой.';
+      $('mainBtn').textContent = 'Нужна отправленная анкета';
+    }
+    controls(); resize();
+  })();
+  </script>
+</body>
+</html>
