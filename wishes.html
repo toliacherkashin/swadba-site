@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FCF8F5">
+  <meta name="description" content="Расскажите о своих пожеланиях к свадебному вечеру Эмми и Толи.">
+  <title>Ваши пожелания — Эмми и Толя</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/survey.css">
+</head>
+<body class="survey-page">
+  <div class="wrap">
+    <nav class="site-header" aria-label="Навигация"><a class="site-brand" href="index_old.html" aria-label="Эмми и Толя — приглашение">Э &amp; Т</a><span class="site-date">17 · 07 · 2027</span><div class="header-links"><a href="index_old.html#rsvpSection">К приглашению</a></div></nav>
+    <header class="survey-header">
+      <div class="eyebrow">17 июля 2027 · Нововоронеж</div>
+      <h1>Вечер, в котором<br>вам будет хорошо</h1>
+      <p class="lead">Мы рады, что вы будете рядом. Расскажите немного о своих предпочтениях — это поможет нам подготовить праздник с заботой о каждом.</p>
+      <p class="small">Около двух минут · Одна анкета на человека · Обязательны только имя и фамилия</p>
+    </header>
+    <main class="layout">
+      <form id="wishesForm" aria-label="Анкета пожеланий">
+        <noscript><div class="card">Для отправки анкеты включите JavaScript или передайте пожелания <a href="https://t.me/flaylip">Эмми в Telegram</a>.</div></noscript>
+        <section class="card" aria-labelledby="guestTitle">
+          <div class="section-head"><span class="number" aria-hidden="true">01</span><h2 id="guestTitle">Давайте познакомимся</h2></div>
+          <p class="hint">Проверьте, пожалуйста, как вас записать в списке гостей.</p>
+          <div class="fields">
+            <div><label class="field-label" for="lastName">Фамилия *</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" maxlength="80" required></div>
+            <div><label class="field-label" for="firstName">Имя *</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" maxlength="80" required></div>
+          </div>
+        </section>
+        <section class="card" aria-labelledby="drinksTitle">
+          <div class="section-head"><span class="number" aria-hidden="true">02</span><h2 id="drinksTitle">Что вам налить?</h2></div>
+          <p class="hint">Можно выбрать несколько вариантов. Если пока не знаете — просто пропустите.</p>
+          <fieldset><legend>Алкогольные напитки</legend>
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="alcohol" value="Игристое">Игристое</label>
+              <label class="choice"><input type="checkbox" name="alcohol" value="Белое вино">Белое вино</label>
+              <label class="choice"><input type="checkbox" name="alcohol" value="Красное вино">Красное вино</label>
+              <label class="choice"><input type="checkbox" name="alcohol" value="Крепкие напитки">Крепкие напитки</label>
+              <label class="choice"><input type="checkbox" name="alcohol" value="Пиво / сидр">Пиво / сидр</label>
+              <label class="choice"><input id="noAlcohol" type="checkbox" name="alcohol" value="Не пью алкоголь">Не пью алкоголь</label>
+            </div>
+          </fieldset>
+          <fieldset><legend>Безалкогольные напитки</legend>
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="softDrinks" value="Вода без газа">Вода без газа</label>
+              <label class="choice"><input type="checkbox" name="softDrinks" value="Вода с газом">Вода с газом</label>
+              <label class="choice"><input type="checkbox" name="softDrinks" value="Сок / морс">Сок / морс</label>
+              <label class="choice"><input type="checkbox" name="softDrinks" value="Лимонад">Лимонад</label>
+              <label class="choice"><input type="checkbox" name="softDrinks" value="Чай">Чай</label>
+              <label class="choice"><input type="checkbox" name="softDrinks" value="Кофе">Кофе</label>
+            </div>
+          </fieldset>
+          <label class="field-label" for="drinkNotes">Любимый напиток или уточнение</label>
+          <input id="drinkNotes" name="drinkNotes" type="text" maxlength="300" placeholder="Например, сухое вино или кофе без кофеина">
+        </section>
+        <section class="card" aria-labelledby="foodTitle">
+          <div class="section-head"><span class="number" aria-hidden="true">03</span><h2 id="foodTitle">Питание и аллергии</h2></div>
+          <p class="hint">Укажите то, что нам нужно учесть при подготовке меню.</p>
+          <fieldset><legend>Предпочтения в питании</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="diet" value="Без ограничений">Без ограничений</label>
+              <label class="choice"><input type="radio" name="diet" value="Без мяса, рыбу ем">Без мяса, рыбу ем</label>
+              <label class="choice"><input type="radio" name="diet" value="Вегетарианское">Вегетарианское</label>
+              <label class="choice"><input type="radio" name="diet" value="Веганское">Веганское</label>
+              <label class="choice"><input type="radio" name="diet" value="Другое">Другое</label>
+              <label class="choice"><input type="radio" name="diet" value="" checked>Не указывать</label>
+            </div>
+          </fieldset>
+          <label class="field-label" for="foodNotes">Что не едите или не любите?</label>
+          <input id="foodNotes" name="foodNotes" type="text" maxlength="500" placeholder="Например, грибы или острые блюда">
+          <fieldset><legend>Есть ли пищевые аллергии или непереносимости?</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="allergyStatus" value="Нет известных">Нет известных</label>
+              <label class="choice"><input type="radio" name="allergyStatus" value="Есть">Есть</label>
+              <label class="choice"><input type="radio" name="allergyStatus" value="Обсужу лично">Обсужу лично</label>
+              <label class="choice"><input type="radio" name="allergyStatus" value="" checked>Не указывать</label>
+            </div>
+          </fieldset>
+          <div id="allergyDetailsRow" hidden>
+            <label class="field-label" for="allergyDetails">Какие продукты необходимо исключить?</label>
+            <textarea id="allergyDetails" name="allergyDetails" maxlength="1200" aria-describedby="allergyHint" placeholder="Перечислите продукты и важные уточнения"></textarea>
+            <p class="small" id="allergyHint">Если нужны особые условия приготовления, напишите об этом — мы свяжемся с вами для уточнения.</p>
+          </div>
+        </section>
+        <section class="card" aria-labelledby="extraTitle">
+          <div class="section-head"><span class="number" aria-hidden="true">04</span><h2 id="extraTitle">Что ещё учесть?</h2></div>
+          <label class="field-label" for="song">Под какую песню вы точно выйдете танцевать?</label>
+          <input id="song" name="song" type="text" maxlength="300" placeholder="Исполнитель и название">
+          <label class="field-label" for="notes">Другие пожелания или вопросы</label>
+          <textarea id="notes" name="notes" maxlength="1500" placeholder="Помощь с дорогой, размещением или что-то ещё, о чём нам стоит знать"></textarea>
+        </section>
+        <section class="card" aria-labelledby="sendTitle">
+          <h2 id="sendTitle">Спасибо за ваши ответы</h2>
+          <p class="hint">Нажмите кнопку ниже, чтобы подтвердить участие и передать пожелания. Можно оставить дополнительные вопросы без ответа. После успешной отправки вас ждёт небольшая игра.</p>
+          <label class="inline-choice"><input id="rememberDraft" type="checkbox"><span>Сохранить черновик на этом устройстве, чтобы вернуться к нему позже</span></label>
+          <p class="small" id="draftStatus" role="status"></p>
+          <button class="btn submit" id="submitBtn" type="submit" disabled>Подтвердить участие и отправить</button>
+          <div id="submitStatus" class="status" role="status" aria-live="polite" tabindex="-1"></div>
+          <div id="fallback" hidden>
+            <p class="small">Можно передать ответы лично: скопируйте текст, откройте чат и отправьте сообщение.</p>
+            <label class="field-label" for="messageText">Ваши ответы</label>
+            <textarea id="messageText" readonly></textarea>
+            <div class="actions">
+              <button class="btn secondary" id="copyBtn" type="button">Скопировать ответы</button>
+              <a class="btn secondary" href="https://t.me/flaylip" target="_blank" rel="noopener noreferrer">Написать Эмме</a>
+              <a class="btn secondary" href="https://t.me/chtoliaa" target="_blank" rel="noopener noreferrer">Написать Толе</a>
+            </div>
+            <p id="copyStatus" class="small" role="status"></p>
+          </div>
+        </section>
+      </form>
+      <aside aria-label="О празднике">
+        <div class="card">
+          <div class="eyebrow">Увидимся совсем скоро</div>
+          <p class="event-date"><time datetime="2027-07-17">17 июля 2027</time></p>
+          <p><strong>Сбор гостей в 14:00</strong><br>По московскому времени</p>
+          <hr class="divider">
+          <p><strong>Вишнёвый сад</strong></p>
+          <p class="small">Нововоронеж, улица Курчатова, 2Б, 2 этаж</p>
+          <hr class="divider">
+          <h3>Главное — быть вместе</h3>
+          <p class="small">Анкета поможет нам учесть ваши пожелания. Если удобнее рассказать лично, просто напишите <a href="https://t.me/flaylip" target="_blank" rel="noopener noreferrer">Эмме</a> или <a href="https://t.me/chtoliaa" target="_blank" rel="noopener noreferrer">Толе</a>.</p>
+        </div>
+      </aside>
+    </main>
+  </div>
+  <footer class="site-footer wrap"><span>С любовью, Эмми и Толя</span><span>17 июля 2027 · Нововоронеж</span></footer>
+  <script>
+  (() => {
+    'use strict';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbziWVr6gYXlTcySN4xcoV_OCU8NHQEMioSktK39JGT90acP76PddcFF4nnu_pTtL3pk/exec';
+    const DRAFT_KEY = 'weddingWishesDraft:2027:v1';
+    const byId = id => document.getElementById(id);
+    const form = byId('wishesForm');
+    const submitBtn = byId('submitBtn');
+    const status = byId('submitStatus');
+    const remember = byId('rememberDraft');
+    const textFields = ['firstName', 'lastName', 'drinkNotes', 'foodNotes', 'allergyDetails', 'song', 'notes'];
+    let pending = false;
+    let draftTimer;
+    let lastSignature = '';
+    let submissionId = '';
+    const selected = name => [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
+    function values() {
+      return {
+        firstName: byId('firstName').value.trim(), lastName: byId('lastName').value.trim(),
+        alcohol: selected('alcohol'), softDrinks: selected('softDrinks'),
+        drinkNotes: byId('drinkNotes').value.trim(), diet: selected('diet')[0] || '',
+        foodNotes: byId('foodNotes').value.trim(), allergyStatus: selected('allergyStatus')[0] || '',
+        allergyDetails: selected('allergyStatus')[0] === 'Есть' ? byId('allergyDetails').value.trim() : '',
+        song: byId('song').value.trim(), notes: byId('notes').value.trim()
+      };
+    }
+    function updateAllergy() {
+      byId('allergyDetailsRow').hidden = selected('allergyStatus')[0] !== 'Есть';
+    }
+    function restore(data) {
+      for (const key of textFields) {
+        if (typeof data[key] === 'string') byId(key).value = data[key].slice(0, byId(key).maxLength);
+      }
+      for (const name of ['alcohol', 'softDrinks', 'diet', 'allergyStatus']) {
+        const list = Array.isArray(data[name]) ? data[name] : [data[name] || ''];
+        form.querySelectorAll(`input[name="${name}"]`).forEach(input => { input.checked = list.includes(input.value); });
+      }
+      if (byId('noAlcohol').checked) {
+        form.querySelectorAll('input[name="alcohol"]').forEach(input => { if (input.id !== 'noAlcohol') input.checked = false; });
+      }
+      updateAllergy();
+    }
+    function saveDraft() {
+      clearTimeout(draftTimer);
+      if (!remember.checked) return;
+      try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(values()));
+        byId('draftStatus').textContent = 'Черновик сохранён на этом устройстве. Он ещё не отправлен.';
+      } catch {
+        byId('draftStatus').textContent = 'Не удалось сохранить черновик на этом устройстве. Анкету можно отправить без сохранения.';
+      }
+    }
+    function clearDraft() {
+      clearTimeout(draftTimer);
+      try {
+        localStorage.removeItem(DRAFT_KEY);
+        byId('draftStatus').textContent = '';
+      } catch {
+        byId('draftStatus').textContent = 'Не удалось удалить ранее сохранённый черновик с этого устройства.';
+      }
+    }
+    let draft;
+    try {
+      const raw = localStorage.getItem(DRAFT_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) draft = parsed;
+      }
+    } catch { /* Storage is optional. */ }
+    let guest;
+    try { guest = JSON.parse(sessionStorage.getItem('weddingGuest') || 'null'); } catch { /* Optional prefill. */ }
+    if (!guest) {
+      try { guest = {firstName: localStorage.getItem('guestFirstName') || '', lastName: localStorage.getItem('guestLastName') || ''}; } catch { /* The guest can enter names. */ }
+    }
+    // A draft belongs to one guest; never attach another guest's dietary details.
+    const guestHasName = guest && (guest.firstName || guest.lastName);
+    const sameGuest = draft && guest && draft.firstName === guest.firstName && draft.lastName === guest.lastName;
+    if (draft && (!guestHasName || sameGuest)) {
+      restore(draft); remember.checked = true;
+      byId('draftStatus').textContent = 'Ваш черновик восстановлен. Проверьте ответы перед отправкой.';
+    } else if (guest) {
+      for (const key of ['firstName', 'lastName']) if (typeof guest[key] === 'string') byId(key).value = guest[key].slice(0, 80);
+    }
+    form.addEventListener('change', event => {
+      const input = event.target;
+      if (input.name === 'alcohol' && input.checked) {
+        if (input.id === 'noAlcohol') form.querySelectorAll('input[name="alcohol"]').forEach(other => { if (other !== input) other.checked = false; });
+        else byId('noAlcohol').checked = false;
+      }
+      updateAllergy();
+      if (input === remember && !remember.checked) clearDraft();
+      else saveDraft();
+    });
+    form.addEventListener('input', () => {
+      clearTimeout(draftTimer);
+      draftTimer = setTimeout(saveDraft, 350);
+      // A changed answer needs its own delivery confirmation.
+      status.textContent = '';
+      byId('fallback').hidden = true;
+    });
+    window.addEventListener('pagehide', saveDraft);
+    function summary(data) {
+      return [
+        `Анкета гостя: ${data.lastName} ${data.firstName}`, 'Свадьба Эмми и Толи — 17 июля 2027', 'Участие: приду',
+        `Алкоголь: ${data.alcohol.join(', ') || 'не указано'}`,
+        `Безалкогольные напитки: ${data.softDrinks.join(', ') || 'не указано'}`,
+        `Уточнение по напиткам: ${data.drinkNotes || '—'}`, `Питание: ${data.diet || 'не указано'}`,
+        `Предпочтения в еде: ${data.foodNotes || '—'}`, `Аллергии / непереносимости: ${data.allergyStatus || 'не указано'}`,
+        ...(data.allergyDetails ? [`Исключить: ${data.allergyDetails}`] : []),
+        `Песня: ${data.song || '—'}`, `Другие пожелания: ${data.notes || '—'}`
+      ].join('\n');
+    }
+    function showStatus(text, kind) {
+      status.textContent = text;
+      status.dataset.kind = kind;
+    }
+    function showFallback(data) {
+      byId('messageText').value = summary(data);
+      byId('fallback').hidden = false;
+    }
+    function lock(value) {
+      pending = value;
+      form.setAttribute('aria-busy', String(value));
+      form.querySelectorAll('input, textarea, button').forEach(input => { input.disabled = value; });
+      submitBtn.textContent = value ? 'Отправляем…' : 'Подтвердить участие и отправить';
+    }
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (pending) return;
+      for (const key of ['firstName', 'lastName']) byId(key).value = byId(key).value.trim();
+      if (!form.reportValidity()) return;
+      const data = values();
+      const signature = JSON.stringify(data);
+      if (signature !== lastSignature) {
+        submissionId = globalThis.crypto?.randomUUID?.() || `wishes-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        lastSignature = signature;
+      }
+      const {firstName, lastName, ...wishes} = data;
+      const payload = {firstName, lastName, willAttend: true, variant: 'old', ts: new Date().toISOString(), schemaVersion: 2, submissionId, wishes};
+      saveDraft();
+      lock(true);
+      byId('fallback').hidden = true;
+      showStatus('Отправляем участие и пожелания…', 'pending');
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(ENDPOINT, {method:'POST', body:JSON.stringify(payload), signal:controller.signal});
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        const accepted = result && (result.ok === true || result.success === true || ['ok', 'success'].includes(result.status));
+        if (!accepted || result.error || result.ok === false || result.success === false) throw new Error('Not confirmed');
+        if (result.wishesSaved === true) {
+          showStatus('Спасибо! Ваше участие и пожелания приняты. Очень ждём встречи с вами!', 'success');
+          remember.checked = false;
+          clearDraft();
+          try { sessionStorage.setItem('weddingSurveyComplete', 'yes'); } catch { /* The game also works without storage. */ }
+          let gameUrl = 'game.html';
+          if (result.gameAccess && typeof result.gameAccess.token === 'string') {
+            try { sessionStorage.setItem('weddingGameAccess', JSON.stringify(result.gameAccess)); }
+            catch { gameUrl += '#access=' + encodeURIComponent(JSON.stringify(result.gameAccess)); }
+          } else {
+            try { sessionStorage.removeItem('weddingGameAccess'); } catch { /* Optional storage. */ }
+          }
+          window.location.assign(gameUrl);
+        } else {
+          showStatus('Участие подтверждено, но сохранение пожеланий не подтверждено. Передайте их Эмми или Толе по ссылкам ниже.', 'warning');
+          showFallback(data);
+        }
+      } catch {
+        showStatus('Подтверждение отправки не получено. Ваши ответы остались в форме. Попробуйте ещё раз или передайте их Эмми или Толе.', 'warning');
+        showFallback(data);
+      } finally {
+        clearTimeout(timeout);
+        lock(false);
+        status.focus();
+      }
+    });
+    byId('copyBtn').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(byId('messageText').value);
+        byId('copyStatus').textContent = 'Текст скопирован. Откройте чат, вставьте его и отправьте.';
+      } catch {
+        byId('messageText').focus(); byId('messageText').select();
+        byId('copyStatus').textContent = 'Текст выделен — скопируйте его вручную и отправьте в чат.';
+      }
+    });
+    updateAllergy();
+    submitBtn.disabled = false;
+  })();
+  </script>
+</body>
+</html>

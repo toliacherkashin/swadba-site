@@ -1,0 +1,35 @@
+.entry-page { min-height:100svh; }
+.entry-page.intro-lock { overflow:hidden; }
+.entry-page #intro { position:fixed; inset:0; z-index:20; display:grid; place-items:center; padding:20px; background:radial-gradient(ellipse at 50% 45%,#FFFDFC,#F8EFF3); }
+.handwriting { display:block; width:min(900px,100%); height:auto; overflow:visible; }
+.ink-letter { fill:var(--accent); }
+.ink-line-1 { fill:#986477; }
+.ink-trace { opacity:0; }
+.writing-pen { color:#9C7381; opacity:0; filter:drop-shadow(0 2px 2px #90617120); pointer-events:none; }
+.intro-skip { position:absolute; bottom:max(26px,env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%); min-height:44px; padding:10px 20px; background:transparent; border:1px solid #DEC9D2; border-radius:999px; color:var(--muted); font:400 14px/1.6 var(--font-body); cursor:pointer; }
+.intro-skip:hover { background:var(--soft); color:var(--accent); }
+#intro.is-leaving { animation:intro-out .5s ease-in forwards; }
+@keyframes intro-out { to { opacity:0; transform:translateY(-4px); } }
+.entry-page #app { opacity:0; transform:translateY(10px); pointer-events:none; transition:opacity .45s,transform .45s; }
+.entry-page.intro-done #app { opacity:1; transform:none; pointer-events:auto; }
+.entry-layout { display:grid; grid-template-columns:1.05fr 1fr; align-items:center; gap:70px; min-height:calc(100svh - 190px); padding:48px 0; }
+.entry-story { position:relative; min-height:510px; padding:40px 0 0; }
+.entry-names { font:400 clamp(68px,7.8vw,112px)/1.05 var(--font-script); letter-spacing:-.025em; margin:28px 0 0; position:relative; z-index:1; }
+.entry-names em { display:block; font-style:normal; color:var(--accent); font-weight:400; margin-left:54px; }
+.entry-date { position:relative; z-index:1; max-width:220px; color:var(--muted); font-size:14px; letter-spacing:.12em; margin:28px 0 0; }
+.entry-flowers { position:absolute; right:0; bottom:0; width:290px; height:240px; pointer-events:none; }
+.entry-flowers .ivory { width:270px; height:270px; position:absolute; right:0; bottom:0; transform:rotate(-16deg); filter:drop-shadow(0 14px 24px #9061711A); }
+.entry-flowers .rose { width:170px; height:170px; position:absolute; left:-30px; bottom:-10px; transform:rotate(18deg); }
+.entry-card { padding:clamp(28px,4vw,52px); background:linear-gradient(140deg,#FFFDFC,#F7EDF1); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow); position:relative; }
+.entry-card::before { content:''; display:block; width:42px; border-top:1px solid var(--accent); margin-bottom:24px; }
+.entry-card h1 { font-size:clamp(30px,3.5vw,44px); margin:12px 0 18px; }
+.entry-card .lead { font-size:16px; margin:0 0 26px; }
+.entry-card .fields { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.entry-card .error { min-height:24px; margin:12px 0 0; }
+.entry-card .submit-button { width:100%; margin-top:8px; }
+.privacy-note { font-size:13px; color:var(--muted); margin:18px 0 0; }
+.no-script { position:fixed; inset:0; z-index:21; display:grid; align-content:center; justify-content:center; gap:14px; margin:0; padding:32px; background:var(--bg); color:var(--ink); text-align:center; }
+.entry-page .site-footer { margin-top:0; }
+@media(max-width:1000px) { .entry-layout { gap:40px; } .entry-story { min-height:460px; } .entry-flowers { right:-14px; transform:scale(.85); transform-origin:right bottom; } }
+@media(max-width:760px) { .entry-layout { grid-template-columns:1fr; gap:32px; padding:32px 0; } .entry-story { min-height:220px; padding:10px 0; } .entry-names { font-size:82px; margin-top:18px; } .entry-names em { margin-left:35px; } .entry-flowers { right:0; bottom:0; transform:scale(.7); } .entry-date { font-size:12px; margin-top:22px; } .entry-card { max-width:620px; width:100%; margin:auto; } }
+@media(max-width:480px) { .entry-story { min-height:215px; } .entry-names { font-size:66px; } .entry-date { max-width:160px; letter-spacing:.03em; } .entry-flowers { transform:scale(.5); right:-12px; bottom:0; } .entry-card { padding:28px 22px; } .entry-card .fields { grid-template-columns:1fr; gap:18px; } .entry-story>.eyebrow { max-width:230px; } }
